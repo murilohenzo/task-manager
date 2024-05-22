@@ -116,21 +116,27 @@ services:
       - "traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)"
       - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
 
-  # gateway:
-  #   depends_on:
-  #     - keycloak
-  #   container_name: gateway_service
-  #   restart: unless-stopped
-  #   build:
-  #     context: ../gateway/docker
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - traefik
-  #   ports:
-  #     - "8085:8080"
-  #   labels:
-  #     - "traefik.http.routers.gateway.rule=Host(`gateway.localhost`)"
-  #     - "traefik.http.services.gateway.loadbalancer.server.port=8080"
+  # SUBIR GATEWAY POR ULTIMO
+
+  gateway:
+    depends_on:
+      - keycloak
+    container_name: gateway_service
+    restart: unless-stopped
+    build:
+      context: ../gateway/docker
+      dockerfile: Dockerfile
+    networks:
+      - traefik
+    ports:
+      - "8085:8080"
+    labels:
+      - "traefik.http.routers.gateway.rule=Host(`gateway.localhost`)"
+      - "traefik.http.services.gateway.loadbalancer.server.port=8080"
+    environment:
+      KEYCLOAK_CLIENT_ID: gateway-auth-des
+      KEYCLOAK_CLIENT_SECRET: XS6Re9GiZ3D0NEy5Yg1dMxfjYD4yb6n9
+      KEYCLOAK_URI: http://keycloak:8080/realms/myrealm
 
 networks:
   traefik:

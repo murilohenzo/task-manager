@@ -22,22 +22,22 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: ${KEYCLOAK_CLIENT_ID}
-            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            client-id: gateway-auth-des
+            client-secret: XS6Re9GiZ3D0NEy5Yg1dMxfjYD4yb6n9
             scope: openid,profile,email
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
-            authorization-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/auth
-            token-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/token
-            user-info-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/userinfo
-            jwk-set-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/certs
+            authorization-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/auth
+            token-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/token
+            user-info-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/certs
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/myrealm
-          jwk-set-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8081/realms/myrealm
+          jwk-set-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/certs
 
 server:
   port: 8085
@@ -52,7 +52,7 @@ server:
     include-stacktrace: never
 management:
   server:
-    port: 9090
+    port: 9095
   endpoint:
     health:
       show-details: always
@@ -64,8 +64,8 @@ management:
 gateway:
   resource:
     client:
-      jwtUrl: http://localhost:8080/realms/myrealm/protocol/openid-connect/token
-      client-id: ${KEYCLOAK_CLIENT_ID}
-      client-secret: ${KEYCLOAK_CLIENT_SECRET}
+      jwtUrl: http://localhost:8081/realms/myrealm/protocol/openid-connect/token
+      client-id: gateway-auth-des
+      client-secret: XS6Re9GiZ3D0NEy5Yg1dMxfjYD4yb6n9
       grantType: password
       scope: "profile email"
