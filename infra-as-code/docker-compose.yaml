@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:13.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRESQL_DB}
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASS}
+    networks:
+      - local-keycloak
+    ports:
+      - "5432:5432"
+  mysql:
+    container_name: mysql_users
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+    networks:
+      - local-keycloak
+    ports:
+      - "3306:3306"
+  keycloak:
+    depends_on:
+      - postgres
+      - mysql
+    container_name: local_keycloak
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KC_DB_USERNAME: ${POSTGRESQL_USER}
+      KC_DB_PASSWORD: ${POSTGRESQL_PASS}
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
+    volumes:
+      -  ./custom-storage-provider/docker/custom-storage-provider.jar:/opt/keycloak/providers/provider.jar
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    command:
+      - start-dev
+    networks:
+      - local-keycloak
+
+networks:
+  local-keycloak:
+    driver: bridge
