@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../../db/config";
+import sequelize from "../../config/db";
 import User from "./User";
 
 const Task = sequelize.define(
@@ -21,6 +21,10 @@ const Task = sequelize.define(
         userId: {
             type: DataTypes.BIGINT
         }
+        
+    },
+    {
+        timestamps: false
     }
 )
 Task.belongsTo(User);

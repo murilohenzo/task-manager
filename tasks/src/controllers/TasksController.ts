@@ -16,10 +16,10 @@ export default class TasksController{
     public createTask = async (req: Request, res: Response) => {
         const { userId, status, descricao}= req.body;
         const taskId = undefined
-        const created = await this.taskService.createTask({userId, status, descricao, taskId});
-        if(created) return res.status(201).json({
+        const task = await this.taskService.createTask({userId, status, descricao, taskId});
+        if(task) return res.status(201).json({
             message: "task cadastrada com sucess",
-            task: created
+            task: task
         })
     }
 

@@ -11,7 +11,9 @@ export default class TaskService{
     }
 
     public createTask = async(taskData: TaskModel) => {
-        return await Task.create(taskData);
+        const task = await Task.create(taskData);
+        task.save();
+        return task;
     }
 
     public updateTask = async(taskData: TaskModel) => {

@@ -1,12 +1,15 @@
 import express from 'express';
-import sequelize from './db/config';
+import sequelize from './config/db';
 import cors from 'cors';
 import taskRoutes from './routes/tasksRoutes';
+import userRoutes from './routes/userRoutes';
 const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(cors());
 app.use(taskRoutes);
+app.use(userRoutes);
+
 const dbInit = async() => {
   try {
     sequelize.authenticate();

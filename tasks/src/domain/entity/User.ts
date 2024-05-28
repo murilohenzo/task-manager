@@ -1,5 +1,5 @@
 import { DataType } from "sequelize-typescript";
-import sequelize from "../../db/config";
+import sequelize from "../../config/db";
 import { DataTypes } from "sequelize";
 
 const User = sequelize.define(
@@ -30,6 +30,9 @@ const User = sequelize.define(
             type: DataTypes.TEXT,
             allowNull: false
         },
+    },
+    {
+        timestamps: false
     }
 )
 
