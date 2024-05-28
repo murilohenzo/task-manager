@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import TaskService from "../services/TaskService";
-
-class TasksController{
+import { TaskModel } from '../../types';
+export default class TasksController{
     private taskService: TaskService;
 
     constructor(){

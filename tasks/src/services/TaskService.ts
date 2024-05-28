@@ -1,5 +1,5 @@
 import Task from "../domain/entity/Task";
-
+import { TaskModel } from "../../types";
 export default class TaskService{
 
     public getAllTasks = async(userId: string) => {
