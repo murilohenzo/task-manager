@@ -1,13 +1,27 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../../config/db";
-import User from "./User";
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelize from '../../config/db'; 
+import User from './User';
+interface TaskAttributes {
+    taskId: number;
+    status: string;
+    descricao: string;
+    userId?: number;
+}
 
-const Task = sequelize.define(
-    'Task',
+interface TaskCreationAttributes extends Optional<TaskAttributes, 'taskId'> {}
+
+class Task extends Model<TaskAttributes, TaskCreationAttributes> implements TaskAttributes {
+    public taskId!: number;
+    public status!: string;
+    public descricao!: string;
+    public userId?: number;
+}
+
+Task.init(
     {
-        taskId:{
+        taskId: {
+            type: DataTypes.INTEGER,
             primaryKey: true,
-            type: DataTypes.BIGINT,
             autoIncrement: true
         },
         status: {
@@ -19,14 +33,22 @@ const Task = sequelize.define(
             allowNull: false
         },
         userId: {
-            type: DataTypes.BIGINT
+            type: DataTypes.BIGINT,
+            references: {
+                model: 'Users', // Nome da tabela referenciada
+                key: 'id'
+            }
         }
-        
     },
     {
-        timestamps: false
+        sequelize,
+        tableName: 'Tasks',
+        timestamps: false, // Desativa createdAt e updatedAt
     }
-)
-Task.belongsTo(User);
+);
+
+// Definindo a associação entre Tasks e Users
+Task.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Task, { foreignKey: 'userId' });
 
 export default Task;

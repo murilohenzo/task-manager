@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserService from "../services/UserService";
 import { UserModel } from '../../types';
+import User from '../domain/entity/User'
 export default class TasksController{
     private userService: UserService;
 
@@ -16,11 +17,12 @@ export default class TasksController{
     }
 
     public createUser = async (req: Request, res: Response) => {
-        const userData: UserModel = req.body;
+        const userData: User = req.body;
         const user = await this.userService.createUser(userData)
         if(user) return res.status(201).json({
-            message: "user cadastrado com sucess",
+            message: "user cadastrado com sucesso",
             user: user
         })
     }
+
 }
