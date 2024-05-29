@@ -1,0 +1,146 @@
+<mat-card class="registration">
+  <mat-card-header class="registration-header">
+    <mat-card-title class="registration-header__title"
+      >Complete o seu cadastro</mat-card-title
+    >
+  </mat-card-header>
+
+  <mat-card-content class="registration-form">
+    <form [formGroup]="registrationForm">
+      <div id="informacoes-pessoais__form-title">
+        <h1 class="registration-form__title">Informações pessoais</h1>
+        <div class="registration-form__user-info">
+          <mat-form-field
+            appearance="outline"
+            class="registration-form__field-name"
+            floatLabel="always"
+          >
+            <mat-label class="input-size">Nome completo</mat-label>
+            <input
+              matInput
+              type="text"
+              class="input-text"
+              formControlName="nome"
+              maxlength="101"
+            />
+            <div *ngIf="nome?.touched && nome?.errors" class="hint-left">
+              <mat-hint
+                class="form-content-warn hint-left"
+                *ngIf="nome?.errors?.['maxlength']"
+              >
+                O nome deve ter no máximo 100 caracteres.
+              </mat-hint>
+              <mat-hint
+                class="form-content-warn hint-left"
+                *ngIf="nome?.errors?.['required']"
+                >O nome é obrigatório.</mat-hint
+              >
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div id="informacoes-de-acesso" class="form-user">
+        <h1 class="registration-form__title">Informações de acesso</h1>
+        <div class="registration-form__user-info">
+          <div class="registration-form__first-field">
+            <mat-form-field
+              appearance="outline"
+              class="registration-form__form-field"
+              floatLabel="always"
+            >
+              <mat-label class="input-size">E-mail:</mat-label>
+              <input
+                matInput
+                type="text"
+                class="input-text"
+                formControlName="email"
+              />
+              <mat-hint
+                *ngIf="!email?.touched || !email?.errors"
+                class="form-content-warn"
+                >O e-mail será utilizado para realizar o login.</mat-hint
+              >
+              <div *ngIf="email?.touched && email?.errors" class="hint-left">
+                <mat-hint
+                  class="form-content-warn hint-left"
+                  *ngIf="email?.errors?.['email']"
+                >
+                  Insira um e-mail válido.
+                </mat-hint>
+                <mat-hint
+                  class="form-content-warn hint-left"
+                  *ngIf="email?.errors?.['required']"
+                >
+                  O e-mail é obrigatório.
+                </mat-hint>
+                <mat-hint
+                  class="form-content-warn hint-left"
+                  *ngIf="email?.errors?.['maxlength']"
+                >
+                  O e-mail deve ter no máximo 100 caracteres.
+                </mat-hint>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="registration-form__form-field"
+              floatLabel="always"
+            >
+              <mat-label class="input-size">Senha</mat-label>
+              <input
+                matInput
+                minlength="6"
+                maxlength="12"
+                [type]="showPassword ? 'text' : 'password'"
+                class="input-text"
+                formControlName="senha"
+                autocomplete="off"
+              />
+              <mat-icon
+                matSuffix
+                class="button-password"
+                (click)="showPassword = !showPassword"
+              >
+                {{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon
+              >
+              <mat-hint
+                *ngIf="!senha?.touched || !senha?.errors"
+                class="form-content-warn"
+                >A senha deve conter entre 6 a 12 caracteres, pelo menos uma
+                letra maiúscula, uma minúscula, um número e um
+                símbolo.</mat-hint
+              >
+              <div *ngIf="senha?.touched && senha?.errors" class="hint-left">
+                <mat-hint
+                  class="form-content-warn hint-left hint-password"
+                  *ngIf="senha?.errors?.['passwordInvalid']"
+                  >A senha deve conter entre 6 a 12 caracteres, pelo menos uma
+                  letra maiúscula, uma minúscula, um número e um símbolo.
+                </mat-hint>
+                <mat-hint
+                  class="form-content-warn hint-left"
+                  *ngIf="senha?.errors?.['required']"
+                >
+                  A senha é obrigatória.
+                </mat-hint>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+    <p id="space-password-hint" class="confirm-terms">
+      Ao preencher o formulário de cadastro você permite que o
+      <span class="confirm-terms--logo">iDiDiT!</span> salve as suas
+      informações.
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button class="button-register" (click)="registerDataForm()">
+      CADASTRAR
+    </button>
+  </mat-card-actions>
+</mat-card>
