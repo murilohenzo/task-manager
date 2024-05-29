@@ -19,7 +19,7 @@ export default class UserService {
           id: userNewData.id,
         },
       });
-      if (!userFromDb) throw new Error('usuário não encontrado');
+      if (!userFromDb) throw new Error('Usuário não encontrado');
       const user = {
         email: userNewData.email ? userNewData.email : userFromDb.email,
         username: userNewData.username

@@ -11,9 +11,9 @@ app.use(userRoutes);
 const dbInit = async () => {
   try {
     sequelize.authenticate();
-    console.log('banco de dados conectado');
+    console.log('Banco de dados conectado com sucesso');
   } catch (error) {
-    console.log('erro ao conectar com banco de dados');
+    console.log('Erro ao conectar ao banco de dados');
   }
 };
 app.get('/', (req, res) => {
@@ -21,5 +21,5 @@ app.get('/', (req, res) => {
 });
 dbInit();
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
