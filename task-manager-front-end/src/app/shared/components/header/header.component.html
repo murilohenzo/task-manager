@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
   <div class="header__items">
-    <span class="header__name" routerLink="/">U-Task Manager</span>
+    <span class="header__name" (click)="navigate('/')">U-Task Manager</span>
     <img
       class="header__logo"
       src="../../../../assets/img/logo.png"
@@ -8,6 +8,8 @@
     />
   </div>
   <div class="header__login">
-    <mat-icon class="header__login--icon" routerLink="/login">login</mat-icon>
+    <mat-icon class="header__login--icon" (click)="navigate('/login')"
+      >login</mat-icon
+    >
   </div>
 </mat-toolbar>
