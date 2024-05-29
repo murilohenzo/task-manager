@@ -11,6 +11,7 @@ export default class TasksController{
     public getAllTasks = async (req: Request, res: Response) => {
         const { userId } = req.params;
         const tasks = await this.taskService.getAllTasks(userId);
+        return res.status(200).json({tasks})
     }
 
     public createTask = async (req: Request, res: Response) => {
@@ -25,6 +26,7 @@ export default class TasksController{
 
     public updateTask = async (req: Request, res: Response) => {
         const newTaskData : TaskModel= req.body; 
+        newTaskData.taskId = +req.params.taskId;
         const updated = await this.taskService.updateTask(newTaskData);
         if (updated) return res.status(200).json({
             message: "task atualizada com sucesso!"
@@ -32,7 +34,7 @@ export default class TasksController{
     }
 
     public deleteTask = async (req: Request, res: Response) => {
-        const { taskId } = req.body
+        const { taskId } = req.params
         const deleted = await this.taskService.deleteTask(taskId);
         return res.status(200).json({
             message: "task deletada com sucesso"

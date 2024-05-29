@@ -25,4 +25,22 @@ export default class TasksController{
         })
     }
 
+    public updateUser = async(req: Request, res: Response) => {
+        const userNewData = req.body;
+        userNewData.id = req.params.id;
+        const updated = await this.userService.updateUser(userNewData);
+        if(updated) return res.status(200).json({
+            message: "usuário atualizado com sucesso",
+            updated
+        })
+    }
+
+    public deleteUser = async(req: Request, res: Response) => {
+        const { id } = req.params;
+        const deleted = await this.userService.deleteUser(+id)
+        if(deleted) return res.status(200).json({
+            message : "usuário deletado com sucesso"
+        });
+    }
+
 }
