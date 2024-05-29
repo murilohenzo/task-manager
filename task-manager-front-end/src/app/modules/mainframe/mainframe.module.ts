@@ -5,6 +5,7 @@ import { MainframePageComponent } from './pages/mainframe-page/mainframe-page.co
 import { HomeModule } from '../home/home.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RegistrationModule } from '../registration/registration.module';
+import { LoginModule } from '../login/login.module';
 
 @NgModule({
   declarations: [MainframePageComponent],
@@ -12,6 +13,7 @@ import { RegistrationModule } from '../registration/registration.module';
     CommonModule,
     HomeModule,
     RegistrationModule,
+    LoginModule,
     MainframeRoutingModule,
     SharedModule
   ]

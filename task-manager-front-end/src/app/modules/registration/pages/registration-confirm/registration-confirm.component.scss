@@ -1,0 +1,49 @@
+@import '/src/styles/variables.scss';
+
+.registration-confirm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  height: 75vh;
+  margin: 15px;
+
+  &__title {
+    color: $blue-darkest;
+    font-family: $lexend;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__img {
+    width: 23vw;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__text {
+    font-family: $lexend;
+    margin-top: 10px;
+  }
+
+  &__login-button {
+    background-color: $yellow-logo;
+    border: none;
+    border-radius: 15px 10px;
+    color: $white;
+    font-family: $lexend;
+    font-weight: 700;
+    padding: 9px 13px;
+
+    &:hover {
+      background-color: $blue-deep;
+      cursor: pointer;
+    }
+  }
+}

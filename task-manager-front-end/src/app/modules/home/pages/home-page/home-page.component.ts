@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Routes } from 'src/app/shared/enums/routes';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +11,6 @@ export class HomePageComponent {
   constructor(private router: Router) {}
 
   navigateToRegistration(): void {
-    this.router.navigate(['/registration']);
+    this.router.navigate([Routes.REGISTRATION]);
   }
 }
