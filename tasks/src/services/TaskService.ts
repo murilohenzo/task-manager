@@ -1,5 +1,5 @@
 import Task from "../domain/entity/Task";
-import { TaskModel } from "../../types";
+import { TaskDTO } from "../dto/TaskDTO";
 export default class TaskService{
 
     public getAllTasks = async(userId: string) => {
@@ -10,13 +10,13 @@ export default class TaskService{
         })
     }
 
-    public createTask = async(taskData: TaskModel) => {
+    public createTask = async(taskData: TaskDTO) => {
         const task = await Task.create(taskData);
         task.save();
         return task;
     }
 
-    public updateTask = async(taskData: TaskModel) => {
+    public updateTask = async(taskData: TaskDTO) => {
         if(taskData.descricao){
             await Task.update({
                 descricao: taskData.descricao

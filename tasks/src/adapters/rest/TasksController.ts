@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import TaskService from "../services/TaskService";
-import { TaskModel } from '../../types';
+import TaskService from "../../services/TaskService";
+import { TaskDTO } from "../../dto/TaskDTO";
+
 export default class TasksController{
     private taskService: TaskService;
 
@@ -15,8 +16,9 @@ export default class TasksController{
     }
 
     public createTask = async (req: Request, res: Response) => {
-        const { userId, status, descricao}= req.body;
+        const { userId, status, descricao }= req.body;
         const taskId = undefined
+        // TODO: VALIDAR USUARIO EXISTE NA BASE ?
         const task = await this.taskService.createTask({userId, status, descricao, taskId});
         if(task) return res.status(201).json({
             message: "task cadastrada com sucess",
@@ -25,7 +27,7 @@ export default class TasksController{
     }
 
     public updateTask = async (req: Request, res: Response) => {
-        const newTaskData : TaskModel= req.body; 
+        const newTaskData : TaskDTO = req.body; 
         newTaskData.taskId = +req.params.taskId;
         const updated = await this.taskService.updateTask(newTaskData);
         if (updated) return res.status(200).json({

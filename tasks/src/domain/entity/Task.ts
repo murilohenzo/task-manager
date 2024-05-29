@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../../config/db'; 
+import sequelize from '../../config/db';
 import User from './User';
+
 interface TaskAttributes {
     taskId: number;
     status: string;
@@ -17,6 +18,7 @@ class Task extends Model<TaskAttributes, TaskCreationAttributes> implements Task
     public userId?: number;
 }
 
+// Inicialização do modelo Task
 Task.init(
     {
         taskId: {
@@ -25,11 +27,11 @@ Task.init(
             autoIncrement: true
         },
         status: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(20),
             allowNull: false
         },
         descricao: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(250),
             allowNull: false
         },
         userId: {
@@ -48,7 +50,20 @@ Task.init(
 );
 
 // Definindo a associação entre Tasks e Users
-Task.belongsTo(User, { foreignKey: 'userId' });
-User.hasMany(Task, { foreignKey: 'userId' });
+Task.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' }); // Task pertence a User
+User.hasMany(Task, { foreignKey: 'userId' }); // User possui várias Tasks
+
+// Função para sincronizar o modelo Task com o banco de dados
+async function syncTaskModel() {
+    try {
+        await sequelize.sync();
+        console.log('Modelo Task sincronizado com o banco de dados.');
+    } catch (error) {
+        console.error('Erro ao sincronizar o modelo Task com o banco de dados:', error);
+    }
+}
+
+// Sincroniza o modelo Task com o banco de dados
+syncTaskModel();
 
 export default Task;

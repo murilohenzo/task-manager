@@ -2,26 +2,48 @@ import express from 'express';
 import sequelize from './config/db';
 import cors from 'cors';
 import taskRoutes from './routes/tasksRoutes';
-import userRoutes from './routes/userRoutes';
+import { EventUsers } from './adapters/queue/EventUsers';
+
 const app = express();
 const port = 3000;
+
+// Configuração do middleware
 app.use(express.json());
 app.use(cors());
 app.use(taskRoutes);
-app.use(userRoutes);
 
-const dbInit = async() => {
+// Função de inicialização do banco de dados
+const dbInit = async () => {
   try {
-    sequelize.authenticate();
-    console.log('banco de dados conectado')
+    await sequelize.authenticate();
+    console.log('Banco de dados conectado');
   } catch (error) {
-    console.log('erro ao conectar com banco de dados')
+    console.error('Erro ao conectar com banco de dados:', error);
   }
-}
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-dbInit();
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+};
+
+// Inicialização do consumidor RabbitMQ
+const initializeRabbitMQConsumer = () => {
+  const eventUsers = new EventUsers();
+  eventUsers.consumer();
+};
+
+// Inicialização do servidor
+const startServer = () => {
+  app.get('/', (req, res) => {
+    res.send('Hello World!');
+  });
+
+  app.listen(port, () => {
+    console.log(`Aplicação escutando em http://localhost:${port}`);
+  });
+};
+
+// Inicialização da aplicação
+const init = async () => {
+  await dbInit();
+  initializeRabbitMQConsumer();
+  startServer();
+};
+
+init();

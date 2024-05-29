@@ -1,7 +1,7 @@
-import { UserModel } from "../../types"
 import User from "../domain/entity/User"
+import { UserDTO } from "../dto/UserDTO";
 
-export default class UserService{
+export class UserService{
     
     public createUser = async (userData: User) => {
         const user = await User.create(userData);
@@ -9,11 +9,19 @@ export default class UserService{
         return user;
     }
 
+    public findUserByEmail = async(email: string) => {
+        return await User.findOne({
+            where: {
+                email: email
+            }
+        })
+    }
+
     public getAllUser = async() => {
         return await User.findAll();
     }
 
-    public updateUser = async(userNewData: UserModel) => {
+    public updateUser = async(userNewData: UserDTO) => {
         try {
             const userFromDb = await User.findOne({
                 where: {
@@ -24,17 +32,11 @@ export default class UserService{
             const user = {
                 email: userNewData.email ? userNewData.email : userFromDb.email,
                 username: userNewData.username ? userNewData.username : userFromDb.username,
-                password: userNewData.password ? userNewData.password : userFromDb.password,
-                firstname: userNewData.firstname ? userNewData.firstname : userFromDb.firstname,
-                lastname: userNewData.lastname ? userNewData.lastname : userFromDb.lastname,
             }
 
             return await User.update({
                 email: user.email,
                 username: user.username,
-                firstname: user.firstname,
-                lastname: user.lastname,
-                password: user.password
             },{
                 where:{
                     id: userNewData.id
