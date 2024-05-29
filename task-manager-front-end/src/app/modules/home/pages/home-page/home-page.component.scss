@@ -16,9 +16,10 @@
   &__title {
     color: $blue-deep;
     font-family: $laleza;
-    font-size: 5.625rem;
+    font-size: 5rem;
     font-weight: 900;
     margin: 0;
+    padding-bottom: 15px;
 
     &--text-yellow {
       color: $yellow-logo;
