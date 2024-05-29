@@ -1,0 +1,162 @@
+@import '/src/styles/variables.scss';
+
+.login {
+  margin-bottom: 20px;
+  margin-top: 100px;
+
+  .login-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .login-card {
+    align-items: center;
+    background: radial-gradient(
+      circle,
+      rgba(250, 250, 250, 1) 0%,
+      rgba(153, 197, 222, 1) 100%
+    );
+    color: $white;
+    height: 50vh;
+    margin: 0 auto;
+    width: 60vw;
+
+    &__title {
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 1.25rem;
+      font-weight: 900;
+      padding: 20px;
+      padding-bottom: 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    &__divider {
+      background-color: $blue-darkest;
+      margin: 0 auto;
+      width: 20vw;
+    }
+
+    &__align {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 30px;
+      height: 30vh;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+
+      &--left {
+        margin-left: 10px;
+        width: 30vw;
+      }
+    }
+
+    &__label {
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 0.625rem;
+    }
+
+    &__input {
+      font-family: $lexend;
+      font-weight: 700;
+    }
+  }
+
+  .login-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+
+    &__save {
+      background-color: $blue-darkest;
+      border: none;
+      border-radius: 4px;
+      color: $white;
+      font-family: $lexend;
+      font-weight: 600;
+      margin: 0 auto;
+      padding: 10px 18px;
+      align-items: center;
+      width: 100px;
+
+      &:hover {
+        background-color: $blue-deep;
+        cursor: pointer;
+      }
+    }
+
+    &__disabled {
+      background-color: $gray-line;
+      border: none;
+      border-radius: 4px;
+      color: $gray-darkest;
+      cursor: default;
+      font-family: $lexend;
+      font-weight: 600;
+      margin: 0 auto;
+      padding: 10px 18px;
+      width: 100px;
+    }
+
+    &__cancel {
+      background-color: $white-box;
+      border: none;
+      border-radius: 4px;
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-weight: 600;
+      margin: 0 auto;
+      padding: 10px 18px;
+      width: 100px;
+
+      &:hover {
+        background-color: $white-hover;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .login-new-register {
+    font-family: $lexend;
+    font-weight: 500;
+
+    &__link {
+      font-family: $lexend;
+      font-weight: 700;
+
+      &:hover {
+        cursor: pointer;
+        color: $blue-deep;
+      }
+    }
+  }
+}
+
+.hint-left {
+  color: $blue-darkest;
+  font-family: $lexend;
+  font-size: 0.55rem;
+  margin-left: 6px !important;
+  margin-top: -35px;
+}
+
+.button-password {
+  color: $blue-darkest;
+
+  &:hover {
+    color: $yellow-logo;
+    cursor: pointer;
+  }
+}

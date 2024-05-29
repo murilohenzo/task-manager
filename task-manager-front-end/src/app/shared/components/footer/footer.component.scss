@@ -1,0 +1,34 @@
+@import '/src/styles/variables.scss';
+
+.footer {
+  background-color: $blue-deep;
+  bottom: 0;
+  box-shadow: 1px 0px 11px -2px $box-shadow;
+  color: $white;
+  display: flex;
+  font-weight: 700;
+  height: 9vh;
+  justify-content: center;
+  gap: 20px;
+  position: absolute;
+  text-transform: uppercase;
+
+  &__items {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 5px;
+  }
+
+  &__icon {
+    font-size: 0.75rem;
+    width: 12px;
+    height: 12px;
+    margin-bottom: 1px;
+  }
+
+  &__team {
+    font-family: $lexend;
+    font-size: 0.5rem;
+  }
+}

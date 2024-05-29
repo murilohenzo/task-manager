@@ -1,0 +1,71 @@
+<div class="login">
+  <div class="login-info">
+    <mat-card class="login-card">
+      <p class="login-card__title">LOGIN</p>
+      <mat-divider class="login-card__divider"></mat-divider>
+
+      <div class="login-card__align">
+        <form class="login-card__form" [formGroup]="loginForm">
+          <mat-form-field class="login-card__form--left" appearance="fill">
+            <mat-label class="login-card__label">E-mail</mat-label>
+            <input class="login-card__input" matInput formControlName="email" />
+          </mat-form-field>
+          <div *ngIf="email?.touched && email?.errors" class="hint-left">
+            <mat-hint class="hint-left" *ngIf="email?.errors?.['email']">
+              Insira um e-mail válido.
+            </mat-hint>
+            <mat-hint class="hint-left" *ngIf="email?.errors?.['required']">
+              O e-mail é obrigatório.
+            </mat-hint>
+          </div>
+
+          <mat-form-field class="login-card__form--left" appearance="fill">
+            <mat-label class="login-card__label">Senha</mat-label>
+            <input
+              class="login-card__input"
+              matInput
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="senha"
+              type="password"
+              autocomplete="off"
+            />
+            <mat-icon
+              matSuffix
+              class="button-password"
+              (click)="showPassword = !showPassword"
+            >
+              {{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon
+            >
+          </mat-form-field>
+          <div *ngIf="senha?.touched && senha?.errors" class="hint-left">
+            <mat-hint class="hint-left" *ngIf="senha?.errors?.['required']">
+              A senha é obrigatória.
+            </mat-hint>
+          </div>
+        </form>
+        <div class="login-buttons">
+          <button
+            [disabled]="loginForm.invalid"
+            [ngClass]="{
+              'login-buttons__save': loginForm.valid,
+              'login-buttons__disabled': loginForm.invalid
+            }"
+            (click)="login()"
+          >
+            Acessar
+          </button>
+          <button class="login-buttons__cancel" (click)="navigate('/')">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <span class="login-new-register"
+      >Ainda não tem conta?
+      <span class="login-new-register__link" (click)="navigate('/registration')"
+        >Cadastre-se.</span
+      ></span
+    >
+  </div>
+</div>

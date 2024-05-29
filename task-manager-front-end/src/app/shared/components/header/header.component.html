@@ -1,0 +1,15 @@
+<mat-toolbar class="header">
+  <div class="header__items">
+    <span class="header__name" (click)="navigate('/')">U-Task Manager</span>
+    <img
+      class="header__logo"
+      src="../../../../assets/img/logo.png"
+      alt="Logo do sistema Task Manager da UNIFOR"
+    />
+  </div>
+  <div class="header__login">
+    <mat-icon class="header__login--icon" (click)="navigate('/login')"
+      >login</mat-icon
+    >
+  </div>
+</mat-toolbar>
