@@ -4,6 +4,7 @@ import { HomePageComponent } from '../home/pages/home-page/home-page.component';
 import { MainframePageComponent } from './pages/mainframe-page/mainframe-page.component';
 import { RegistrationComponent } from '../registration/pages/registration/registration.component';
 import { LoginComponent } from '../login/pages/login/login.component';
+import { RegistrationConfirmComponent } from '../registration/pages/registration-confirm/registration-confirm.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'registration',
         component: RegistrationComponent
+      },
+      {
+        path: 'registration-confirm',
+        component: RegistrationConfirmComponent
       },
       {
         path: 'login',
