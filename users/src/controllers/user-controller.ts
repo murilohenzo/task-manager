@@ -1,37 +1,28 @@
 import { Request, Response } from 'express';
-import { User } from '../models/user';
-import { hash } from 'bcryptjs';
+import UserService from '../services/user-service';
+import { UserModel } from '../types';
+import User from '../models/user';
+export default class TasksController {
+  private userService: UserService;
 
-export default class UserController {
-  static getUsers = async (req: Request, res: Response) => {
-    try {
-      const users = await User.findAll();
-      res.status(200).json(users);
-    } catch (error) {
-      console.log(error);
-    }
+  constructor() {
+    this.userService = new UserService();
+  }
+
+  public getAllUsers = async (req: Request, res: Response) => {
+    const users = await this.userService.getAllUser();
+    return res.status(200).json({
+      users,
+    });
   };
 
-  static createUser = async (req: Request, res: Response) => {
-    try {
-      const { nome, email, senha } = req.body;
-      const hashedPassword = await hash(senha, 8);
-      const user = new User({ nome, email, senha: hashedPassword });
-
-      if (
-        await User.findAll({
-          where: {
-            email: email,
-          },
-        })
-      ) {
-        res.status(401).json({ message: 'email já cadastrado' });
-      }
-
-      user.save();
-      res.status(201).json({ message: 'usuário criado com sucesso', user });
-    } catch (error) {
-      console.log(error);
-    }
+  public createUser = async (req: Request, res: Response) => {
+    const userData: User = req.body;
+    const user = await this.userService.createUser(userData);
+    if (user)
+      return res.status(201).json({
+        message: 'user cadastrado com sucesso',
+        user: user,
+      });
   };
 }

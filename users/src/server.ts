@@ -1,10 +1,25 @@
 import express from 'express';
-import connection from './config/dbConfig';
-
+import sequelize from './config/dbConfig';
+import cors from 'cors';
+import userRoutes from './routes/user-routes';
 const app = express();
+const port = 3000;
+app.use(express.json());
+app.use(cors());
+app.use(userRoutes);
 
-app.listen(3000, () => {
-  console.log(`server running in port 3000`);
+const dbInit = async () => {
+  try {
+    sequelize.authenticate();
+    console.log('banco de dados conectado');
+  } catch (error) {
+    console.log('erro ao conectar com banco de dados');
+  }
+};
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
-
-connection.connect();
+dbInit();
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});

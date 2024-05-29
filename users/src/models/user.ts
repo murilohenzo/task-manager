@@ -1,53 +1,62 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
+import sequelize from '../config/dbConfig';
 
-export class User extends Model {
-  declare id: number;
-  declare username: string;
-  declare password: string;
-  declare email: string;
-  declare firstName: string;
-  declare lastName: string;
-
-  init(sequelize: Sequelize): void {
-    User.init(
-      {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          allowNull: false,
-          autoIncrement: true,
-        },
-        username: {
-          type: DataTypes.STRING(64),
-          allowNull: false,
-        },
-        password: {
-          type: DataTypes.STRING(64),
-          allowNull: false,
-        },
-        email: {
-          type: DataTypes.STRING(64),
-          allowNull: false,
-        },
-        firstName: {
-          type: DataTypes.STRING(64),
-          allowNull: false,
-        },
-        lastName: {
-          type: DataTypes.STRING(64),
-          allowNull: false,
-        },
-      },
-      {
-        sequelize,
-        tableName: 'users',
-        underscored: true,
-        schema: 'usersdb',
-      }
-    );
-  }
-
-  associate(): void {
-    return;
-  }
+interface UserAttributes {
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+  firstname: string;
+  lastname: string;
 }
+
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+
+class User
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
+  public id!: number;
+  public username!: string;
+  public password!: string;
+  public email!: string;
+  public firstname!: string;
+  public lastname!: string;
+}
+
+User.init(
+  {
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true,
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    firstname: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    lastname: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'Users',
+    timestamps: false,
+  }
+);
+
+export default User;
