@@ -23,15 +23,21 @@ export class RegistrationComponent {
   );
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder // private newUserStore: NewUserStoreService
+  ) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
   }
 
-  createRegistrationForm(): void {
+  registerDataForm(): any {
+    // this.newUserStore.setFormValue(this.registrationForm.value);
+    console.log(this.registrationForm.value);
+  }
+
+  private createRegistrationForm(): void {
     this.registrationForm = this.fb.group({
-      blocked: [false],
       nome: ['', [Validators.required, Validators.maxLength(100)]],
       email: [
         '',
@@ -47,11 +53,6 @@ export class RegistrationComponent {
         ]
       ]
     });
-  }
-
-  registerDataForm(): any {
-    // this.newUserStore.setFormValue(this.registrationForm.value);
-    console.log(this.registrationForm.value);
   }
 
   private validatePassword(control: AbstractControl): ValidationErrors | null {
@@ -72,7 +73,7 @@ export class RegistrationComponent {
   }
 
   get nome() {
-    return this.registrationForm.get('name');
+    return this.registrationForm.get('nome');
   }
 
   get email() {
