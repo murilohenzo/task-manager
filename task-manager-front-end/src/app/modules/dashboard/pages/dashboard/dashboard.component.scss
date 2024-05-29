@@ -1,0 +1,7 @@
+@import '/src/styles/variables.scss';
+
+.dashboard {
+  height: 80vh;
+  overflow: auto;
+  background: $blue-lightest;
+}

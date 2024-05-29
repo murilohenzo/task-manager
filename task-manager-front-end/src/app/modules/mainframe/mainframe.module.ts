@@ -6,6 +6,7 @@ import { HomeModule } from '../home/home.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RegistrationModule } from '../registration/registration.module';
 import { LoginModule } from '../login/login.module';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 @NgModule({
   declarations: [MainframePageComponent],
@@ -14,6 +15,7 @@ import { LoginModule } from '../login/login.module';
     HomeModule,
     RegistrationModule,
     LoginModule,
+    DashboardModule,
     MainframeRoutingModule,
     SharedModule
   ]
