@@ -1,0 +1,61 @@
+@import '/src/styles/variables.scss';
+
+.home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
+  overflow: auto;
+  padding: 10px 20px;
+
+  &__container {
+    margin: 20px;
+  }
+
+  &__title {
+    color: $blue-deep;
+    font-family: $laleza;
+    font-size: 5rem;
+    font-weight: 900;
+    margin: 0;
+    padding-bottom: 15px;
+
+    &--text-yellow {
+      color: $yellow-logo;
+    }
+  }
+
+  &__subtitle {
+    color: $blue-darkest;
+    font-family: $laleza;
+    font-size: 0.875rem;
+    font-weight: 900;
+    margin: 0;
+    text-align: left;
+    padding-bottom: 60px;
+  }
+
+  &__logo {
+    margin-bottom: 6px;
+    width: 15vw;
+    padding-bottom: 50px;
+  }
+
+  &__registration {
+    color: $white;
+    background-color: $blue-deep;
+    font-family: $lexend;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 1px 2px 11px -1px $box-shadow;
+
+    &:hover {
+      background-color: $blue-darkest;
+      cursor: pointer;
+    }
+  }
+}
