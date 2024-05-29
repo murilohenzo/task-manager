@@ -11,6 +11,7 @@ export class EventUsers {
   }
 
   consumer() {
+
     connect("amqp://guest:guest@localhost:5672/", (error, connection) => {
       if (error) {
         console.error('Erro ao conectar ao RabbitMQ:', error);

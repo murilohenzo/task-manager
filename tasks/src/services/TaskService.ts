@@ -1,5 +1,7 @@
 import Task from "../domain/entity/Task";
+import { TipoPrioridade, CorPrioridade } from "../dto/PrioridadeEnum";
 import { TaskDTO } from "../dto/TaskDTO";
+
 export default class TaskService{
 
     public getAllTasks = async(userId: string) => {
@@ -11,9 +13,11 @@ export default class TaskService{
     }
 
     public createTask = async(taskData: TaskDTO) => {
-        const task = await Task.create(taskData);
-        task.save();
-        return task;
+        const {prioridade, cor, ...task} = taskData;
+        const getColor = this.getColorPrioridade(+taskData.prioridade);
+        const newTask = await Task.create({cor: getColor, prioridade, ...task});
+        newTask.save();
+        return newTask;
     }
 
     public updateTask = async(taskData: TaskDTO) => {
@@ -22,27 +26,35 @@ export default class TaskService{
                 descricao: taskData.descricao
             }, {
                 where: {
-                    taskId: taskData.taskId
+                    id: taskData.id
                 }
             })
         }
-        if(taskData.status){
+        if(taskData.done) { // TODO: Mudei para boleano 
             await Task.update({
-                descricao: taskData.status
+                descricao: taskData.descricao,
+                disciplina: taskData.disciplina,
+                periodo: taskData.periodo
             }, {
                 where: {
-                    taskId: taskData.taskId
+                    id: taskData.id
                 }
             })
         }
         return true;
     }
 
-    public deleteTask = async(taskId: string) => {
+    public deleteTask = async(id: string) => {
         return await Task.destroy({
             where: {
-                taskId
+                id
             }
         });
+    }
+
+    private getColorPrioridade(prioridade: number) {
+        if(prioridade === TipoPrioridade.alta) return CorPrioridade.alta;
+        else if (prioridade === TipoPrioridade.media) return CorPrioridade.media;
+        return CorPrioridade.baixa;
     }
 }

@@ -1,6 +1,11 @@
 export type TaskDTO = {
-  taskId: number | undefined,
-  status: string,
-  descricao: string,
+  id: number | undefined,
+  nome: string;
+  prioridade: number;
+  cor: string;
+  descricao: string;
+  disciplina: string;
+  periodo: string;
+  done: boolean;
   userId: number
 }

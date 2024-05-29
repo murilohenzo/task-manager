@@ -16,10 +16,10 @@ export default class TasksController{
     }
 
     public createTask = async (req: Request, res: Response) => {
-        const { userId, status, descricao }= req.body;
-        const taskId = undefined
+        const { userId, done, descricao, ...rest }: TaskDTO = req.body;
+        const id = undefined
         // TODO: VALIDAR USUARIO EXISTE NA BASE ?
-        const task = await this.taskService.createTask({userId, status, descricao, taskId});
+        const task = await this.taskService.createTask({userId, done, descricao, ...rest});
         if(task) return res.status(201).json({
             message: "task cadastrada com sucess",
             task: task
@@ -28,7 +28,7 @@ export default class TasksController{
 
     public updateTask = async (req: Request, res: Response) => {
         const newTaskData : TaskDTO = req.body; 
-        newTaskData.taskId = +req.params.taskId;
+        newTaskData.id = +req.params.taskId;
         const updated = await this.taskService.updateTask(newTaskData);
         if (updated) return res.status(200).json({
             message: "task atualizada com sucesso!"

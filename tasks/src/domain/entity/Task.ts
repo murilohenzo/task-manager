@@ -3,36 +3,67 @@ import sequelize from '../../config/db';
 import User from './User';
 
 interface TaskAttributes {
-    taskId: number;
-    status: string;
+    id: number;
+    nome: string;
+    prioridade: number;
+    cor: string;
     descricao: string;
+    disciplina: string;
+    periodo: string;
+    done: boolean;
     userId?: number;
 }
 
-interface TaskCreationAttributes extends Optional<TaskAttributes, 'taskId'> {}
+interface TaskCreationAttributes extends Optional<TaskAttributes, 'id'> {}
 
 class Task extends Model<TaskAttributes, TaskCreationAttributes> implements TaskAttributes {
-    public taskId!: number;
-    public status!: string;
+    public id!: number;
+    public nome!: string;
+    public prioridade!: number;
+    public cor!: string;
     public descricao!: string;
+    public disciplina!: string;
+    public periodo!: string;
+    public done!: boolean;
     public userId?: number;
 }
 
 // Inicialização do modelo Task
 Task.init(
     {
-        taskId: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        status: {
-            type: DataTypes.STRING(20),
+        nome: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        prioridade: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        cor: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         descricao: {
-            type: DataTypes.STRING(250),
+            type: DataTypes.STRING,
             allowNull: false
+        },
+        disciplina: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        periodo: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        done: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         },
         userId: {
             type: DataTypes.BIGINT,

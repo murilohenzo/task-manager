@@ -5,7 +5,7 @@ import taskRoutes from './routes/tasksRoutes';
 import { EventUsers } from './adapters/queue/EventUsers';
 
 const app = express();
-const port = 3000;
+const port = 3005;
 
 // Configuração do middleware
 app.use(express.json());
