@@ -1,11 +1,24 @@
 import { UserModel } from '../types';
 import User from '../models/user';
+import { Op } from 'sequelize';
 
 export default class UserService {
   public createUser = async (userData: User) => {
-    const user = await User.create(userData);
-    user.save();
-    return user;
+    console.log(userData);
+
+    if (
+      await User.findOne({
+        where: {
+          [Op.or]: [{ username: userData.username }, { email: userData.email }],
+        },
+      })
+    ) {
+      throw new Error('Usuário já cadastrado');
+    } else {
+      const user = await User.create(userData);
+      user.save();
+      return user;
+    }
   };
 
   public getAllUser = async () => {
@@ -30,18 +43,18 @@ export default class UserService {
           : userFromDb.password,
         firstname: userNewData.firstname
           ? userNewData.firstname
-          : userFromDb.firstname,
+          : userFromDb.firstName,
         lastname: userNewData.lastname
           ? userNewData.lastname
-          : userFromDb.lastname,
+          : userFromDb.lastName,
       };
 
       return await User.update(
         {
           email: user.email,
           username: user.username,
-          firstname: user.firstname,
-          lastname: user.lastname,
+          firstName: user.firstname,
+          lastName: user.lastname,
           password: user.password,
         },
         {

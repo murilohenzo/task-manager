@@ -17,13 +17,27 @@ export default class TasksController {
   };
 
   public createUser = async (req: Request, res: Response) => {
-    const userData: User = req.body;
-    const user = await this.userService.createUser(userData);
-    if (user)
-      return res.status(201).json({
-        message: 'Usuário cadastrado com sucesso',
-        user: user,
+    const userData: User = Object.keys(req.body).length !== 0 ? req.body : null;
+
+    if (!userData) {
+      return res.status(404).json({
+        message: 'Dados não encontrados',
       });
+    }
+
+    try {
+      if (userData) {
+        const user = await this.userService.createUser(userData);
+        if (user)
+          return res.status(201).json({
+            message: 'Usuário cadastrado com sucesso',
+            user: user,
+          });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error });
+    }
   };
 
   public updateUser = async (req: Request, res: Response) => {

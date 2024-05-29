@@ -6,8 +6,8 @@ interface UserAttributes {
   username: string;
   password: string;
   email: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -20,8 +20,8 @@ class User
   public username!: string;
   public password!: string;
   public email!: string;
-  public firstname!: string;
-  public lastname!: string;
+  public firstName!: string;
+  public lastName!: string;
 }
 
 User.init(
@@ -30,6 +30,7 @@ User.init(
       type: DataTypes.BIGINT,
       primaryKey: true,
       allowNull: false,
+      autoIncrement: true,
     },
     username: {
       type: DataTypes.TEXT,
@@ -43,11 +44,11 @@ User.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    firstname: {
+    firstName: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    lastname: {
+    lastName: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -56,6 +57,7 @@ User.init(
     sequelize,
     tableName: 'Users',
     timestamps: false,
+    underscored: true,
   }
 );
 
