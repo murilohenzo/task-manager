@@ -1,1 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
+@import '/src/styles/variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $lexend;
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: $white-box;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: $white-hover;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: $white-hover;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $blue-darkest;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: $yellow-logo;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: $yellow-logo;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
+  border-color: $blue-darkest !important;
+}
+
+.radio-high-priority {
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+    background-color: $high-priority !important;
+  }
+
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: $high-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled:checked
+    + .mdc-radio__background
+    .mdc-radio__outer-circle {
+    border-color: $high-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled
+    + .mdc-radio__background
+    .mdc-radio__inner-circle {
+    border-color: $high-priority !important;
+  }
+}
+
+.radio-medium-priority {
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+    background-color: $medium-priority !important;
+  }
+
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: $medium-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled:checked
+    + .mdc-radio__background
+    .mdc-radio__outer-circle {
+    border-color: $medium-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled
+    + .mdc-radio__background
+    .mdc-radio__inner-circle {
+    border-color: $medium-priority !important;
+  }
+}
+
+.radio-low-priority {
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+    background-color: $low-priority !important;
+  }
+
+  &.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: $low-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled:checked
+    + .mdc-radio__background
+    .mdc-radio__outer-circle {
+    border-color: $low-priority !important;
+  }
+
+  &.mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled
+    + .mdc-radio__background
+    .mdc-radio__inner-circle {
+    border-color: $low-priority !important;
+  }
+}
+
+.mdc-snackbar__surface {
+  padding: 0 !important;
+}
