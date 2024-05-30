@@ -8,15 +8,6 @@ spring:
     allow-bean-definition-overriding: true
   beaninfo:
     ignore: true
-  cloud:
-    gateway:
-      routes:
-        - id: teste
-          uri: http://httpbin.org
-          predicates:
-            - Path=/get
-          filters:
-            - TokenRelay=
   security:
     oauth2:
       client:
