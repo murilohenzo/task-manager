@@ -16,9 +16,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
+import { SnackbarSucessDeleteComponent } from './components/snackbars/snackbar-sucess-delete/snackbar-sucess-delete.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ErrorModalComponent],
+  declarations: [HeaderComponent, FooterComponent, ErrorModalComponent, SnackbarSucessDeleteComponent],
   imports: [
     CommonModule,
     MatToolbarModule,

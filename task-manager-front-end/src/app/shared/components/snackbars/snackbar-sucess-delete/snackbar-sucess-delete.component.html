@@ -1,0 +1,15 @@
+<div class="snackbar-delete">
+  <span class="snackbar-delete__title" matSnackBarLabel>
+    Task deletada com sucesso!
+  </span>
+  <span matSnackBarActions>
+    <button
+      mat-button
+      matSnackBarAction
+      (click)="snackBarRef.dismissWithAction()"
+      class="snackbar-delete__button"
+    >
+      X
+    </button>
+  </span>
+</div>
