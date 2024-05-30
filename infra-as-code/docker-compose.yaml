@@ -22,30 +22,30 @@ services:
     networks:
       - traefik
 
-  prometheus:
-    image: prom/prometheus:v2.30.3
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    # labels:
-    #   - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
-    volumes:
-      - ./prometheus:/etc/prometheus
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-    networks:
-      - traefik
+  # prometheus:
+  #   image: prom/prometheus:v2.30.3
+  #   container_name: prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   # labels:
+  #   #   - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
+  #   volumes:
+  #     - ./prometheus:/etc/prometheus
+  #   command:
+  #     - "--config.file=/etc/prometheus/prometheus.yml"
+  #   networks:
+  #     - traefik
 
-  grafana:
-    image: grafana/grafana:8.3.0
-    container_name: grafana
-    ports:
-      - "3000:8080"
-    labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
-      - "traefik.http.services.grafana.loadbalancer.server.port=8080"
-    networks:
-      - traefik
+  # grafana:
+  #   image: grafana/grafana:8.3.0
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:8080"
+  #   labels:
+  #     - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
+  #     - "traefik.http.services.grafana.loadbalancer.server.port=8080"
+  #   networks:
+  #     - traefik
 
   keycloak_db:
     image: postgres:13.2
@@ -62,6 +62,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  users_db:
+    image: mysql:8-debian
+    restart: unless-stopped
+    container_name: mysql_users_db
+    environment:
+      MYSQL_DATABASE: users_store
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      - traefik
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql_users
+
   tasks_db:
     image: mysql:8-debian
     restart: unless-stopped
@@ -74,14 +90,14 @@ services:
     networks:
       - traefik
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql_tasks
 
   keycloak:
     depends_on:
       - keycloak_db
-      - tasks_db
+      - users_db
     container_name: keycloak_local
     environment:
       KC_DB: postgres

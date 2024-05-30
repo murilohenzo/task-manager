@@ -47,18 +47,32 @@ User.init(
     firstName: {
       type: DataTypes.TEXT,
       allowNull: false,
+      field: 'firstName'
     },
     lastName: {
       type: DataTypes.TEXT,
       allowNull: false,
+      field: 'lastName'
     },
   },
   {
     sequelize,
-    tableName: 'Users',
+    tableName: 'users',
     timestamps: false,
     underscored: true,
   }
 );
+
+// Sincroniza o modelo com o banco de dados
+async function syncModel() {
+  try {
+      await sequelize.sync();
+      console.log('Modelo User sincronizado com o banco de dados.');
+  } catch (error) {
+      console.error('Erro ao sincronizar o modelo User com o banco de dados:', error);
+  }
+}
+
+syncModel();
 
 export default User;

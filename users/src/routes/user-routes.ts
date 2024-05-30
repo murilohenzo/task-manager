@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
   .get('/user', userController.getAllUsers)
-  .post('/user', userController.createUser)
+  .post('/user/signup', userController.createUser)
   .put('/user/:id', userController.updateUser)
   .delete('/user/:id', userController.deleteUser);
 
