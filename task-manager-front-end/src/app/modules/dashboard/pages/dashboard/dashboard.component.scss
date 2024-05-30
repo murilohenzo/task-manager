@@ -1,7 +1,61 @@
 @import '/src/styles/variables.scss';
 
 .dashboard {
+  display: flex;
+  align-items: flex-start;
+  background: $blue-lightest;
+  flex-direction: column;
   height: 80vh;
   overflow: auto;
-  background: $blue-lightest;
+
+  &__title {
+    color: $blue-darkest;
+    font-family: $lexend;
+    font-size: 1.275rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 25px 37px 0;
+
+    &--bolder {
+      font-weight: 900;
+    }
+  }
+
+  &__empty {
+    color: $blue-darkest;
+    font-family: $lexend;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 25px 37px 0;
+  }
+
+  &__button {
+    background: none;
+    border: none;
+    padding: 17px 0;
+    position: fixed;
+    right: 3%;
+
+    .add-icon {
+      color: $blue-darkest;
+      font-size: 50px;
+      width: 60px;
+      height: 60px;
+
+      &:hover {
+        color: $yellow-logo;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__tasks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 30px 30px;
+  }
 }
