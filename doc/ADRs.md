@@ -63,10 +63,21 @@ Os microserviços de usuário (ms-user) e tarefas (ms-task) precisam interagir p
 
 ### Decisão
 
-Utilizar uma abordagem de coreografia de mensagens, onde os microserviços se comunicam entre si por meio de mensagens assíncronas.
+Optamos por adotar uma abordagem de coreografia de mensagens, onde os microserviços se comunicam entre si por meio de mensagens assíncronas. Essas mensagens incluem informações importantes sobre o usuário, como o tipo de evento de usuário e metadados relevantes, que permitem que o microserviço de tarefas (ms-task) monte uma referência do usuário atual na base de tarefas. Isso possibilita a criação de uma relação de um usuário para várias tarefas no backend de tarefas.
+
+### Fluxo de Integração
+
+![Integracao](./assets/diagrama_de_sequencia_integracao.jpeg)
+
+
+1. Quando ocorre um evento de usuário no microserviço de usuário (ms-user), como registro, atualização ou exclusão de um usuário, um evento de aplicação é disparado, contendo informações sobre o tipo de evento e metadados relevantes sobre o usuário.
+   
+2. O microserviço de tarefas (ms-task) está inscrito para receber esses eventos de aplicação. Ao receber um evento, ele processa as informações recebidas e monta uma referência do usuário atual na base de tarefas, permitindo que cada tarefa esteja associada ao usuário correspondente.
+
+3. Quando uma nova tarefa é criada pelo microserviço de tarefas (ms-task), a referência do usuário é incluída nos dados da tarefa, estabelecendo assim a relação entre o usuário e a tarefa no backend de tarefas.
 
 ### Consequências
 
-- Desacoplamento entre os microserviços, permitindo evolução independente.
-- Maior tolerância a falhas e escalabilidade, pois as mensagens podem ser processadas de forma assíncrona.
-- Complexidade adicional na gestão das mensagens e garantia de entrega.
+- Desacoplamento entre os microserviços, permitindo a evolução independente de cada um.
+- Maior tolerância a falhas e escalabilidade devido ao processamento assíncrono das mensagens.
+- Complexidade adicional na gestão das mensagens e garantia de entrega, exigindo uma abordagem cuidadosa na implementação e monitoramento do sistema de mensageria.
