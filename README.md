@@ -13,7 +13,7 @@ Este projeto implementa uma arquitetura de microsserviços para um gerenciador d
 
 ## Índice
 
-1. [IAC](./doc/IAC.md)
-2. [ADRs](./doc/ADRs.md)
+1. [Registros de Decisão de Arquitetura ](./doc/ADRs.md)
+2. [Infraestrutura como codigo](./doc/IAC.md)
 3. [Configurando Keycloak](./doc/Keycloak.md)
 4. [Configurando Gateway](./doc/Gateway.md)
