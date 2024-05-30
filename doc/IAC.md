@@ -107,7 +107,4 @@ Este fluxo de Docker Compose representa a infraestrutura como código (IaC), per
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para obter mais informações.
-```
-
-Neste `README.md`, cada seção importante do documento tem um cabeçalho específico, e o índice no início permite uma navegação fácil. Você pode ajustar os cabeçalhos e o conteúdo conforme necessário para atender às necessidades do seu projeto.
+Este projeto está licenciado sob a licença Apache. Consulte o arquivo `LICENSE` para obter mais informações.
