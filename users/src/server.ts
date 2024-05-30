@@ -3,7 +3,7 @@ import sequelize from './config/dbConfig';
 import cors from 'cors';
 import userRoutes from './routes/user-routes';
 const app = express();
-const port = 3000;
+const port = 3003;
 app.use(express.json());
 app.use(cors());
 app.use(userRoutes);

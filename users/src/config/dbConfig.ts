@@ -1,10 +1,12 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize({
+const sequelize = new Sequelize('mysql://localhost:3306/users_store', {
   dialect: 'mysql',
   username: 'root',
-  password: 'root',
-  database: 'usersdb',
+  password: 'admin',
+  define: {
+    underscored: false
+  }
 });
 
 export default sequelize;
