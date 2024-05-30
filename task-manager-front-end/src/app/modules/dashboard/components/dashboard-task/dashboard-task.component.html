@@ -77,7 +77,11 @@
         </mat-radio-group>
       </div>
       <div class="buttons">
-        <button mat-button class="buttons__buttons">
+        <button
+          mat-button
+          class="buttons__buttons"
+          (click)="openDeleteTaskModal()"
+        >
           <span class="material-symbols-outlined delete-icon"> delete </span>
         </button>
         <mat-slide-toggle [color]="'primary'" formControlName="done"
