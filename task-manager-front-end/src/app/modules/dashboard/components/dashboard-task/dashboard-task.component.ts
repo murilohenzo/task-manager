@@ -26,9 +26,13 @@ export class DashboardTaskComponent {
     this.editForm = this.fb.group({
       id: [this.task.id],
       nome: [this.task.nome],
-      descricao: [this.task.descricao],
       prioridade: [this.task.prioridade],
-      cor: [this.task.cor]
+      cor: [this.task.cor],
+      descricao: [this.task.descricao],
+      disciplina: [this.task.disciplina],
+      periodo: [this.task.periodo],
+      done: [this.task.done],
+      userId: [this.task.userId]
     });
   }
 

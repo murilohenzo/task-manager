@@ -17,44 +17,73 @@
       [ngStyle]="{ 'background-color': editForm.controls['cor'].value }"
     ></mat-divider>
 
-    <mat-card-content class="task-description">
-      <textarea
-        class="task-description__text"
-        type="text"
-        matInput
-        placeholder="(Descrição)"
-        formControlName="descricao"
-      ></textarea>
+    <mat-card-content class="task-fields">
+      <div>
+        <h1 class="task-fields__title">Disciplina</h1>
+        <textarea
+          class="task-fields__text"
+          type="text"
+          matInput
+          placeholder="(Disciplina)"
+          formControlName="disciplina"
+        ></textarea>
+      </div>
+      <div>
+        <h1 class="task-fields__title">Período</h1>
+        <textarea
+          class="task-fields__text"
+          type="text"
+          matInput
+          placeholder="(Período)"
+          formControlName="periodo"
+        ></textarea>
+      </div>
+      <div>
+        <h1 class="task-fields__title">Descrição</h1>
+        <textarea
+          class="task-fields__description"
+          type="text"
+          matInput
+          placeholder="(Descrição)"
+          formControlName="descricao"
+        ></textarea>
+      </div>
     </mat-card-content>
 
     <mat-card-actions class="task-actions">
-      <mat-radio-group formControlName="prioridade">
-        <mat-radio-button
-          [checked]="task.prioridade === 1"
-          value="1"
-          class="radio-high-priority"
+      <div class="actions">
+        <mat-radio-group formControlName="prioridade">
+          <mat-radio-button
+            [checked]="task.prioridade === 1"
+            value="1"
+            class="radio-high-priority"
+          >
+            <span class="actions__radio-button">Alta</span>
+          </mat-radio-button>
+          <mat-radio-button
+            [checked]="task.prioridade === 2"
+            value="2"
+            class="radio-medium-priority"
+          >
+            <span class="actions__radio-button">Média</span>
+          </mat-radio-button>
+          <mat-radio-button
+            [checked]="task.prioridade === 3"
+            value="3"
+            class="radio-low-priority"
+          >
+            <span class="actions__radio-button">Baixa</span>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="buttons">
+        <button mat-button class="buttons__buttons">
+          <span class="material-symbols-outlined delete-icon"> delete </span>
+        </button>
+        <mat-slide-toggle [color]="'primary'" formControlName="done"
+          >Feito</mat-slide-toggle
         >
-          <span class="task-actions__radio-button">Alta</span>
-        </mat-radio-button>
-        <mat-radio-button
-          [checked]="task.prioridade === 2"
-          value="2"
-          class="radio-medium-priority"
-        >
-          <span class="task-actions__radio-button">Média</span>
-        </mat-radio-button>
-        <mat-radio-button
-          [checked]="task.prioridade === 3"
-          value="3"
-          class="radio-low-priority"
-        >
-          <span class="task-actions__radio-button">Baixa</span>
-        </mat-radio-button>
-      </mat-radio-group>
-
-      <button mat-button class="task-actions__buttons">
-        <span class="material-symbols-outlined delete-icon"> delete </span>
-      </button>
+      </div>
     </mat-card-actions>
   </form>
 </mat-card>
