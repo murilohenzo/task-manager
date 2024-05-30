@@ -8,8 +8,7 @@ Este documento contém registros das decisões arquiteturais tomadas durante o d
 - [Decisão 2: Escolha de Keycloak como Provedor de Identidade](#decisão-2-escolha-de-keycloak-como-provedor-de-identidade)
 - [Decisão 3: Integração com RabbitMQ](#decisão-3-integração-com-rabbitmq)
 - [Decisão 4: Uso de Mensageria para Coreografia entre Microserviços](#decisão-4-uso-de-mensageria-para-coreografia-entre-microserviços)
-- [Fluxo de Integração](#fluxo-de-integração)
-
+  
 ## Decisão 1: Uso de Docker Compose
 
 ### Contexto
