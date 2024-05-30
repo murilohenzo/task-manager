@@ -1,0 +1,189 @@
+@import '/src/styles/variables.scss';
+
+.task {
+  height: 420px;
+  background: $blue-lightest;
+  border: 5px solid $white-hover;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .task-close {
+    color: $blue-darkest;
+    margin-left: 380px;
+    padding-top: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .task-header {
+    margin-bottom: 10px;
+    padding-top: 0;
+
+    &__label {
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin: 0;
+      padding: 0;
+      margin-right: 8px;
+    }
+
+    &__title {
+      background: none;
+      border: none;
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+      height: 50px;
+      width: 315px;
+    }
+
+    input {
+      border-bottom: 2px solid $blue-darkest;
+    }
+
+    input:focus {
+      border-bottom: 2px solid $blue-deep;
+    }
+  }
+
+  .task-divider {
+    background-color: $white-hover;
+    height: 7px;
+    width: 100%;
+  }
+
+  .task-fields {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 5px 0 0 0;
+
+    &__title {
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 0.675rem;
+      font-weight: 700;
+      margin: -5px 0 -5px 16px;
+    }
+
+    &__text,
+    &__description {
+      background-color: $white;
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 0.675rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      line-height: normal;
+      padding: 3px 16px;
+      overflow: auto;
+      width: 100%;
+    }
+
+    &__text {
+      height: 23px;
+    }
+
+    &__description {
+      height: 50px;
+    }
+
+    textarea:focus {
+      border: 2px solid $blue-deep;
+    }
+  }
+
+  .task-actions {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    margin: 0 16px;
+    gap: 5px;
+
+    &__radio-button {
+      color: $blue-darkest;
+      font-family: $lexend;
+      font-size: 0.675rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-left: -8px;
+    }
+
+    &__button {
+      background-color: $blue-deep;
+      border: none;
+      border-radius: 4px;
+      color: $white;
+      font-size: 0.75rem;
+      font-family: $lexend;
+      font-weight: 600;
+      margin: 0 auto;
+      padding: 10px 18px;
+      align-items: center;
+      width: 100px;
+
+      &:hover {
+        background-color: $blue-darkest;
+        cursor: pointer;
+      }
+    }
+
+    &--align {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $blue-deep;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: $blue-darkest;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 200, 'opsz' 24;
+}
+
+textarea {
+  word-break: break-word !important;
+  border: none;
+  word-wrap: break-word !important;
+  resize: none;
+}
+
+textarea:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+
+input:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Task } from 'src/app/shared/interfaces/task.interface';
+import { NewTaskComponent } from '../../components/modals/new-task/new-task.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,4 +44,18 @@ export class DashboardComponent {
       userId: 123445
     }
   ];
+
+  constructor(private dialog: MatDialog) {}
+
+  openModalNewTask(): void {
+    this.dialog
+      .open(NewTaskComponent, {
+        data: { usuario: '' },
+        width: '420px'
+      })
+      .afterClosed()
+      .subscribe(() => {
+        // TODO: adicionar método que retorna a lista de tasks
+      });
+  }
 }
