@@ -1,0 +1,25 @@
+<mat-card class="error">
+  <div>
+    <mat-icon mat-dialog-close class="error-close" close>close</mat-icon>
+
+    <mat-card-header class="error-header">
+      <mat-card-title class="error-header__title">OPS!</mat-card-title>
+      <mat-card-subtitle class="error-header__subtitle"
+        >Algo deu errado</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-divider class="error-divider"></mat-divider>
+
+    <mat-card-content class="error-description">
+      <p>Tente novamente.</p>
+      <p>Se o problema persistir, entre em contato com o nosso suporte.</p>
+    </mat-card-content>
+  </div>
+
+  <mat-card-actions class="error-actions">
+    <button mat-button class="error-actions__button" mat-dialog-close>
+      OK!
+    </button>
+  </mat-card-actions>
+</mat-card>

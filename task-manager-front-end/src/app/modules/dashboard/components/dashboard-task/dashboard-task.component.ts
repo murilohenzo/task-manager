@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from 'src/app/shared/interfaces/task.interface';
 import { PriorityColors, PriorityLevel } from '../../enums/priority-level';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteTaskComponent } from '../modals/delete-task/delete-task.component';
 
 @Component({
   selector: 'app-dashboard-task',
@@ -14,12 +16,22 @@ export class DashboardTaskComponent {
 
   editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.buildForm();
     this.verifyColorChange();
     this.mapValueChanged();
+  }
+
+  openDeleteTaskModal(): void {
+    this.dialog
+      .open(DeleteTaskComponent, {
+        width: '400px',
+        data: { id: this.editForm.controls['id'].value }
+      })
+      .afterClosed()
+      .subscribe(() => this.reloadTasks.emit(true));
   }
 
   private buildForm(): void {

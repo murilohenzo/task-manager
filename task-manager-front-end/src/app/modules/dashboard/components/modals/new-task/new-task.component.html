@@ -1,0 +1,87 @@
+<mat-card class="task">
+  <form [formGroup]="newTaskForm" class="task__form">
+    <div>
+      <mat-icon mat-dialog-close class="task-close" close>close</mat-icon>
+
+      <mat-card-header class="task-header">
+        <mat-card-title>
+          <mat-label class="task-header__label">Nome:</mat-label>
+          <input
+            class="task-header__title"
+            type="text"
+            matInput
+            formControlName="nome"
+          />
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-divider
+        class="task-divider"
+        [ngStyle]="{ 'background-color': dividerColor }"
+      ></mat-divider>
+
+      <mat-card-content class="task-fields">
+        <div>
+          <h1 class="task-fields__title">Disciplina</h1>
+          <textarea
+            class="task-fields__text"
+            type="text"
+            matInput
+            placeholder="(Disciplina)"
+            formControlName="disciplina"
+          ></textarea>
+        </div>
+        <div>
+          <h1 class="task-fields__title">Período</h1>
+          <textarea
+            class="task-fields__text"
+            type="text"
+            matInput
+            placeholder="(Período)"
+            formControlName="periodo"
+          ></textarea>
+        </div>
+        <div>
+          <h1 class="task-fields__title">Descrição</h1>
+          <textarea
+            class="task-fields__description"
+            type="text"
+            placeholder="(Descrição)"
+            matInput
+            formControlName="descricao"
+          ></textarea>
+        </div>
+      </mat-card-content>
+    </div>
+
+    <mat-card-actions class="task-actions">
+      <div class="task-actions--align">
+        <mat-label class="task-header__label task-header__label--priority">
+          Importância:
+        </mat-label>
+        <mat-radio-group formControlName="prioridade">
+          <mat-radio-button value="1" class="radio-high-priority">
+            <span class="task-actions__radio-button">Alta</span>
+          </mat-radio-button>
+          <mat-radio-button value="2" class="radio-medium-priority">
+            <span class="task-actions__radio-button">Média</span>
+          </mat-radio-button>
+          <mat-radio-button value="3" class="radio-low-priority">
+            <span class="task-actions__radio-button">Baixa</span>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="task-actions--align">
+        <mat-label class="task-header__label">Status: </mat-label>
+        <mat-slide-toggle [color]="'primary'" formControlName="done">
+          Feito
+        </mat-slide-toggle>
+      </div>
+
+      <button mat-button class="task-actions__button" (click)="createTask()">
+        <span> Adicionar </span>
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
