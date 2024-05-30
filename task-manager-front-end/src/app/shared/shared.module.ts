@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -29,7 +30,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDividerModule,
     MatRadioModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule
   ],
   exports: [
     HeaderComponent,
@@ -44,7 +46,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDividerModule,
     MatRadioModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule
   ]
 })
 export class SharedModule {}
