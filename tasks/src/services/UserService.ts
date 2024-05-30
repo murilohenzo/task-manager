@@ -9,10 +9,10 @@ export class UserService{
         return user;
     }
 
-    public findUserByEmail = async(email: string) => {
+    public findUserByReferenceId = async(referenceId: string) => {
         return await User.findOne({
             where: {
-                email: email
+                referenceId: referenceId
             }
         })
     }
@@ -25,7 +25,7 @@ export class UserService{
         try {
             const userFromDb = await User.findOne({
                 where: {
-                    id: userNewData.id
+                    referenceId: userNewData.referenceId
                 }
             })
             if(!userFromDb) throw new Error('usuário não encontrado')
@@ -39,7 +39,7 @@ export class UserService{
                 username: user.username,
             },{
                 where:{
-                    id: userNewData.id
+                    referenceId: userNewData.referenceId
                 }
             })
 
@@ -48,10 +48,10 @@ export class UserService{
         }
     }
 
-    public deleteUser = async(userId: number) => {
+    public deleteUser = async(referenceId: string) => {
         return await User.destroy({
             where: {
-                 id: userId
+                 referenceId: referenceId
             }
         })
     }

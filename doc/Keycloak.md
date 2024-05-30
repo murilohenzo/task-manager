@@ -4,7 +4,7 @@ Este documento fornece instruções detalhadas sobre como configurar o Keycloak.
 
 ## Acessando Keycloak
 
-1. Acesse o Keycloak em [http://keycloak.localhost:8081](http://keycloak.localhost:8081).
+1. Acesse o Keycloak em [http://keycloak.localhost:8081](http://keycloak.localhost:8081) ou [http://localhost:8080/admin](http://localhost:8080/admin).
 2. Use as credenciais padrão:
    - **Usuário**: `admin`
    - **Senha**: `admin`
@@ -57,7 +57,7 @@ Este documento fornece instruções detalhadas sobre como configurar o Keycloak.
    - Ainda na seção "User Federation", selecione "Add provider" e escolha "Custom User Federation" como o tipo de provedor.
    - Configure os detalhes necessários para o provedor personalizado, como o JAR do provedor e outras configurações específicas.
       - Configure as seguintes informações para se integrar com a base de dados de usuários MySQL:
-     - **JDBC URL**: jdbc:mysql://users_db/users_store
+     - **JDBC URL**: jdbc:mysql://users_db:3306/users_store
      - **Database User**: admin
      - **Database Password**: admin
    - Salve as configurações.
