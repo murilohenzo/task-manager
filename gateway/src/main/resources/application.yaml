@@ -23,6 +23,12 @@ spring:
           - Path=/user/**
           filters:
           - TokenRelay=
+        - id: tasks
+          uri: http://localhost:3005
+          predicates:
+          - Path=/tasks/**
+          filters:
+          - TokenRelay=
   security:
     oauth2:
       client:
