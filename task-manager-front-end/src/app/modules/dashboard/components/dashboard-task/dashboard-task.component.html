@@ -1,0 +1,60 @@
+<mat-card class="task">
+  <form [formGroup]="editForm">
+    <mat-card-header class="task-header">
+      <mat-card-title>
+        <input
+          class="task-header__title"
+          type="text"
+          matInput
+          placeholder="(Nome)"
+          formControlName="nome"
+        />
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-divider
+      class="task-divider"
+      [ngStyle]="{ 'background-color': editForm.controls['cor'].value }"
+    ></mat-divider>
+
+    <mat-card-content class="task-description">
+      <textarea
+        class="task-description__text"
+        type="text"
+        matInput
+        placeholder="(Descrição)"
+        formControlName="descricao"
+      ></textarea>
+    </mat-card-content>
+
+    <mat-card-actions class="task-actions">
+      <mat-radio-group formControlName="prioridade">
+        <mat-radio-button
+          [checked]="task.prioridade === 1"
+          value="1"
+          class="radio-high-priority"
+        >
+          <span class="task-actions__radio-button">Alta</span>
+        </mat-radio-button>
+        <mat-radio-button
+          [checked]="task.prioridade === 2"
+          value="2"
+          class="radio-medium-priority"
+        >
+          <span class="task-actions__radio-button">Média</span>
+        </mat-radio-button>
+        <mat-radio-button
+          [checked]="task.prioridade === 3"
+          value="3"
+          class="radio-low-priority"
+        >
+          <span class="task-actions__radio-button">Baixa</span>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <button mat-button class="task-actions__buttons">
+        <span class="material-symbols-outlined delete-icon"> delete </span>
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
