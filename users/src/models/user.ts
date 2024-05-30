@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/dbConfig';
+import { v4 as uuidv4 } from 'uuid';
 
 interface UserAttributes {
   id: number;
@@ -8,6 +9,7 @@ interface UserAttributes {
   email: string;
   firstName: string;
   lastName: string;
+  referenceId: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -22,6 +24,7 @@ class User
   public email!: string;
   public firstName!: string;
   public lastName!: string;
+  public referenceId!: string;
 }
 
 User.init(
@@ -54,6 +57,12 @@ User.init(
       allowNull: false,
       field: 'lastName'
     },
+    referenceId: {
+      type: DataTypes.CHAR(36),
+      allowNull: false,
+      field: 'referenceId',
+      defaultValue: uuidv4
+    }
   },
   {
     sequelize,

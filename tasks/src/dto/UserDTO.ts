@@ -1,5 +1,6 @@
 export type UserDTO = {
-  id: number | undefined,
-  username: string,
-  email: string,
+  id: number | undefined;
+  username: string;
+  email: string;
+  referenceId: string;
 }

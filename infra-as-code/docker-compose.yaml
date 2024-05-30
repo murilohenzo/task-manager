@@ -1,49 +1,24 @@
 version: '3.9'
 
 services:
-  traefik:
-    image: traefik:v2.5
-    container_name: traefik
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-      - "--metrics.prometheus=true"
-      - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.rabbitmq.address=:15672"
-      - "--metrics.prometheus.entrypoint=web"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-      - "15672:15672"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    networks:
-      - traefik
-
-  # prometheus:
-  #   image: prom/prometheus:v2.30.3
-  #   container_name: prometheus
-  #   ports:
-  #     - "9090:9090"
-  #   # labels:
-  #   #   - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
-  #   volumes:
-  #     - ./prometheus:/etc/prometheus
+  # traefik:
+  #   image: traefik:v2.5
+  #   container_name: traefik
   #   command:
-  #     - "--config.file=/etc/prometheus/prometheus.yml"
-  #   networks:
-  #     - traefik
-
-  # grafana:
-  #   image: grafana/grafana:8.3.0
-  #   container_name: grafana
+  #     - "--api.insecure=true"
+  #     - "--providers.docker=true"
+  #     - "--entrypoints.web.address=:80"
+  #     - "--metrics.prometheus=true"
+  #     - "--entrypoints.websecure.address=:443"
+  #     - "--entrypoints.rabbitmq.address=:15672"
+  #     - "--metrics.prometheus.entrypoint=web"
   #   ports:
-  #     - "3000:8080"
-  #   labels:
-  #     - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
-  #     - "traefik.http.services.grafana.loadbalancer.server.port=8080"
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"
+  #     - "15672:15672"
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
   #   networks:
   #     - traefik
 
@@ -65,7 +40,7 @@ services:
   users_db:
     image: mysql:8-debian
     restart: unless-stopped
-    container_name: mysql_users_db
+    container_name: users_db
     environment:
       MYSQL_DATABASE: users_store
       MYSQL_USER: admin
@@ -111,54 +86,125 @@ services:
     volumes:
       - ./custom-storage-provider/docker/custom-storage-provider.jar:/opt/keycloak/providers/provider.jar
     ports:
-      - "8081:8080"
+      - "8080:8080"
     restart: unless-stopped
     command:
       - start-dev
     networks:
       - traefik
-    labels:
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)"
-      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+    # labels:
+    #   - "traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)"
+    #   - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
       - "5672:5672"
-    labels:
-      - "traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.localhost`)"
-      - "traefik.http.services.mq.loadbalancer.server.port=15672"
-      - "traefik.http.routers.mq.entrypoints=websecure"
+      - "15672:15672"
+    # labels:
+    #   - "traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.localhost`)"
+    #   - "traefik.http.services.mq.loadbalancer.server.port=15672"
+    #   - "traefik.http.routers.mq.entrypoints=websecure"
     networks:
       - traefik
 
-  # SUBIR GATEWAY POR ULTIMO
+  users_service:
+    depends_on:
+    - users_db
+    - rabbitmq
+    - keycloak
+    container_name: users_service
+    restart: unless-stopped
+    build:
+      context: ../users
+      dockerfile: Dockerfile
+    networks:
+      traefik:
+        ipv4_address: 172.18.0.20
+    ports:
+      - "3003:3003"
+    # labels:
+    #   - "traefik.http.routers.users_service.rule=Host(`users_service.localhost`)"
+    #   - "traefik.http.services.users_service.loadbalancer.server.port=8080"
 
-  # gateway:
-  #   depends_on:
-  #     - keycloak
-  #   container_name: gateway_service
-  #   restart: unless-stopped
-  #   build:
-  #     context: ../gateway/docker
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - traefik
-  #   ports:
-  #     - "8085:8080"
-  #   labels:
-  #     - "traefik.http.routers.gateway.rule=Host(`gateway.localhost`)"
-  #     - "traefik.http.services.gateway.loadbalancer.server.port=8080"
-  #   environment:
-  #     KEYCLOAK_CLIENT_ID: spring-cloud-test
-  #     KEYCLOAK_CLIENT_SECRET: vuf8aY5rif80EnJ76JtMezrgbMHgHs4L
-  #     KEYCLOAK_URI: http://keycloak:8080/realms/myrealm
-      
+  tasks_service:
+    depends_on:
+    - tasks_db
+    - rabbitmq
+    container_name: tasks_service
+    restart: unless-stopped
+    build:
+      context: ../tasks
+      dockerfile: Dockerfile
+    networks:
+      traefik:
+        ipv4_address: 172.18.0.21
+    ports:
+      - "3005:3005"
+    # labels:
+    #   - "traefik.http.routers.tasks_service.rule=Host(`tasks_service.localhost`)"
+    #   - "traefik.http.services.tasks_service.loadbalancer.server.port=8080"
+
+
+# SUBIR GATEWAY POR ULTIMO
+
+  gateway:
+    depends_on:
+      - keycloak
+      - users_service
+      - tasks_service
+    container_name: gateway_service
+    restart: unless-stopped
+    build:
+      context: ../gateway/docker
+      dockerfile: Dockerfile
+    networks:
+      - traefik
+    ports:
+      - "8085:8085"
+    # labels:
+    #   - "traefik.http.routers.gateway.rule=Host(`gateway.localhost`)"
+    #   - "traefik.http.services.gateway.loadbalancer.server.port=8080"
+    environment:
+      KEYCLOAK_CLIENT_ID: gateway-auth-des
+      KEYCLOAK_CLIENT_SECRET: JpJ3asOKUDsO9Gn8tXS6yFLOpRBapjIj
+      KEYCLOAK_URI: http://keycloak:8080/realms/myrealm
+
 networks:
   traefik:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16  # Sub-rede personalizada
 
 volumes:
   postgres_data:
   mysql_data:
+
+
+  # prometheus:
+  #   image: prom/prometheus:v2.30.3
+  #   container_name: prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   # labels:
+  #   #   - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
+  #   volumes:
+  #     - ./prometheus:/etc/prometheus
+  #   command:
+  #     - "--config.file=/etc/prometheus/prometheus.yml"
+  #   networks:
+  #     - traefik
+
+  # grafana:
+  #   image: grafana/grafana:8.3.0
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:8080"
+  #   labels:
+  #     - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
+  #     - "traefik.http.services.grafana.loadbalancer.server.port=8080"
+  #   networks:
+  #     - traefik

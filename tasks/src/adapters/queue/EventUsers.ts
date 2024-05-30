@@ -12,7 +12,9 @@ export class EventUsers {
 
   consumer() {
 
-    connect("amqp://guest:guest@localhost:5672/", (error, connection) => {
+    // uri: para bater no service do rabbit do container na rede traefik
+    // rodar local mudar para: "amqp://guest:guest@localhost:5672/"
+    connect("amqp://guest:guest@rabbitmq:5672/", (error, connection) => {
       if (error) {
         console.error('Erro ao conectar ao RabbitMQ:', error);
         return;
@@ -26,7 +28,7 @@ export class EventUsers {
           return;
         }
 
-        console.log("CRIANDO CANAL DE COMUNICACAO")
+        console.log("CRIANDO CANAL DE COMUNICACAO COM A FILA")
 
         channel.assertQueue("todo");
 
@@ -46,12 +48,12 @@ export class EventUsers {
               // @ts-ignore
               const user: User = userData; 
 
-              console.log("TIPO DE EVENTO:", eventType)
+              console.log("EVENTO DE USUARIO RECEBIDO:", eventType)
 
               switch (eventType) {
                 case EventType.CREATED:
                   {
-                    const existingUser = await this.userService.findUserByEmail(userData.email);
+                    const existingUser = await this.userService.findUserByReferenceId(userData.referenceId);
 
                     if (existingUser) throw new Error('Usuario ja existe na base');
                     
@@ -61,16 +63,16 @@ export class EventUsers {
                   }
                 case EventType.UPDATED:
                   {
-                    const existingUser = await this.userService.findUserByEmail(userData.email);
+                    const existingUser = await this.userService.findUserByReferenceId(userData.referenceId);
                     if (!existingUser) throw new Error('Usuario nao existe na base');
                     await this.userService.updateUser(user);
                     break;
                   }
                 case EventType.DELETED:
                   {
-                    const existingUser = await this.userService.findUserByEmail(userData.email);
+                    const existingUser = await this.userService.findUserByReferenceId(userData.referenceId);
                     if (existingUser?.id) {
-                      await this.userService.deleteUser(existingUser.id);
+                      await this.userService.deleteUser(existingUser.referenceId);
                     } else {
                       console.log("Usuário não encontrado com o email:", userData.email);
                     }
