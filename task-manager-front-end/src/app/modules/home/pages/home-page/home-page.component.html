@@ -9,7 +9,11 @@
     src="../../../../assets/img/logo.png"
     alt="Logo do sistema Task Manager UNIFOR"
   />
-  <button class="home__registration" (click)="navigateToRegistration()">
+  <button
+    *ngIf="!isAuthenticated"
+    class="home__registration"
+    (click)="navigateToRegistration()"
+  >
     Criar conta
   </button>
 </div>

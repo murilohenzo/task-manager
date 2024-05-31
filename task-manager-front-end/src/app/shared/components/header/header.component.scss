@@ -14,6 +14,7 @@
   &__items {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 13px;
   }
 
@@ -21,9 +22,29 @@
     font-family: $laleza;
     font-size: 1.875rem;
     font-weight: 900;
+    margin: 0;
 
     &:hover {
       color: $white-hover;
+      cursor: pointer;
+    }
+  }
+
+  &__page {
+    border-bottom: 1px solid $white-hover;
+    color: $white-hover;
+    font-family: $lexend;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+
+    &--padding {
+      padding-left: 30px;
+    }
+
+    &:hover {
+      border-bottom: 1px solid $yellow-logo;
+      color: $yellow-logo;
       cursor: pointer;
     }
   }
@@ -33,15 +54,37 @@
     width: 40px;
   }
 
-  &__login {
+  &__buttons {
     align-items: center;
     display: flex;
     gap: 20px;
     margin-right: 10px;
 
-    &--icon:hover {
-      color: $white-hover;
-      cursor: pointer;
+    .login {
+      align-items: center;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: center;
+
+      &__description {
+        color: $white;
+        font-family: $lexend;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin: 0;
+        padding-right: 4px;
+      }
+
+      &__icon {
+        color: $white;
+      }
+
+      &__description:hover,
+      &__icon:hover {
+        color: $white-hover;
+        cursor: pointer;
+      }
     }
   }
 }

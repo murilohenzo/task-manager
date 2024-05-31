@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RegistrationModule } from '../registration/registration.module';
 import { LoginModule } from '../login/login.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
+import { UnauthorizedModule } from '../unauthorized/unauthorized.module';
 
 @NgModule({
   declarations: [MainframePageComponent],
@@ -17,7 +18,8 @@ import { DashboardModule } from '../dashboard/dashboard.module';
     LoginModule,
     DashboardModule,
     MainframeRoutingModule,
-    SharedModule
+    SharedModule,
+    UnauthorizedModule
   ]
 })
 export class MainframeModule {}
