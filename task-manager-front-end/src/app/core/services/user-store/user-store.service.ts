@@ -3,7 +3,8 @@ import { BehaviorSubject, debounceTime, filter } from 'rxjs';
 import {
   UserPost,
   UserLogin,
-  UserLoginResponse
+  UserLoginResponse,
+  UserNameResponse
 } from 'src/app/shared/interfaces/user.interface';
 import { UserService } from '../user/user.service';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -74,7 +75,7 @@ export class UserStoreService {
         this.authenticationService.login(userValue).subscribe({
           next: (request: UserLoginResponse) => {
             localStorage.setItem('token', request.access_token);
-            // localStorage.setItem('id', JSON.stringify(request.result.user.id));
+            this.setUserId(userValue.username);
             this.router.navigate([Routes.DASHBOARD]);
           },
           error: () =>
@@ -84,5 +85,13 @@ export class UserStoreService {
               .subscribe(() => this.router.navigate([Routes.LOGIN]))
         });
       });
+  }
+
+  private setUserId(username: string): void {
+    this.authenticationService.getUserByUsername(username).subscribe({
+      next: (response: UserNameResponse) => {
+        localStorage.setItem('id', JSON.stringify(response.referenceId));
+      }
+    });
   }
 }
