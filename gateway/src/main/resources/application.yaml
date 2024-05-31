@@ -41,15 +41,15 @@ spring:
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
-            authorization-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/auth
-            token-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/token
-            user-info-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/userinfo
-            jwk-set-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs
+            authorization-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/certs
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak:8080/realms/myrealm
-          jwk-set-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/myrealm
+          jwk-set-uri: http://localhost:8080/realms/myrealm/protocol/openid-connect/certs
 
 server:
   port: 8085
@@ -76,7 +76,7 @@ management:
 gateway:
   resource:
     client:
-      jwtUrl: http://keycloak:8080/realms/myrealm/protocol/openid-connect/token
+      jwtUrl: http://localhost:8080/realms/myrealm/protocol/openid-connect/token
       client-id: gateway-auth-des
       client-secret: RfxkVHghvhwOivuZauPwut4mzKPLLJn1
       grantType: password
