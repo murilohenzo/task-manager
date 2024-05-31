@@ -1,0 +1,454 @@
+{
+	"info": {
+		"_postman_id": "6898190f-bbe6-4bc1-8bea-1c03132e03e1",
+		"name": "TASK-MANAGER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5003255"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Token\", function () {\r",
+							"    const { access_token } = pm.response.json();\r",
+							"    pm.environment.set(\"JWT\", access_token);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NOVO USUARIO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get UserReferenceId\", function () {\r",
+							"    const { user } = pm.response.json();\r",
+							"    pm.environment.set(\"refId\", user.referenceId);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"john@gmail.com\",\r\n    \"firstName\": \"john\",\r\n    \"lastName\": \"doe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ATUALIZA USUARIO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": true,
+				"disableUrlEncoding": false,
+				"disableCookies": false
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"value": "insomnia/9.2.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user 7\",\n\t\t\t\"password\": \"1235\",\n\t\t\t\"email\": \"user@user5\",\n\t\t\t\"firstName\": \"joão\",\n\t\t\t\"lastName\": \"segundo nome\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/user/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"user",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REMOVE USUARIO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": true,
+				"disableUrlEncoding": false,
+				"disableCookies": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "insomnia/9.2.0"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8085/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LISTAR USUARIOS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR USUARIO PELO USERNAME",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/user/:username",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"user",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "john"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CRIAR TASK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Matemática Básica\",\r\n    \"prioridade\": 3,\r\n    \"descricao\": \"Curso introdutório de matemática.\",\r\n    \"disciplina\": \"Matemática\",\r\n    \"periodo\": \"2024-01\",\r\n    \"userReferenceId\": \"{{refId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ATUALIZA TASK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Matemática Básica\",\r\n    \"prioridade\": 3,\r\n    \"descricao\": \"Curso introdutório de geografia.\",\r\n    \"disciplina\": \"Matemática\",\r\n    \"periodo\": \"2024-01\",\r\n    \"userReferenceId\": \"{{refId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/tasks/:taskId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"tasks",
+						":taskId"
+					],
+					"variable": [
+						{
+							"key": "taskId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REMOVE TASK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/tasks/:taskId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"tasks",
+						":taskId"
+					],
+					"variable": [
+						{
+							"key": "taskId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR TASKS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/tasks/:userId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"tasks",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "{{refId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3500",
+			"type": "string"
+		}
+	]
+}
