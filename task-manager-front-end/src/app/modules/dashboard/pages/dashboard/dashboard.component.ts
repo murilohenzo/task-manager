@@ -16,6 +16,7 @@ import { Routes } from 'src/app/shared/enums/routes';
 export class DashboardComponent implements OnInit {
   tasks: Task[] = [];
   userId!: string | null;
+  username!: string | null;
 
   constructor(
     private dashboardService: DashboardService,
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
 
   private getUserId(): void {
     this.userId = JSON.parse(localStorage.getItem('id') as string);
+    this.username = JSON.parse(localStorage.getItem('name') as string);
   }
 
   private getTasks(): void {

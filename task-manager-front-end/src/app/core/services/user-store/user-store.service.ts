@@ -91,6 +91,7 @@ export class UserStoreService {
     this.authenticationService.getUserByUsername(username).subscribe({
       next: (response: UserNameResponse) => {
         localStorage.setItem('id', JSON.stringify(response.referenceId));
+        localStorage.setItem('name', JSON.stringify(response.firstName));
       }
     });
   }
