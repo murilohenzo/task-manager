@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
-    private static final List<String> NO_CSRF = List.of("/login", "/user/signup");
+    private static final List<String> NO_CSRF = List.of("/login", "/user/signup", "/tasks", "/tasks/**", "/user/**");
     private static final List<String> PUBLIC_ENDPOINTS = List.of("/login", "/user/signup");
 
     @NotNull

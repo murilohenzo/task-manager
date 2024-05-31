@@ -7,7 +7,7 @@ export default class TaskService{
     public getAllTasks = async(userId: string) => {
         return await Task.findAll({
             where: {
-                userId
+                id: userId
             }
         })
     }

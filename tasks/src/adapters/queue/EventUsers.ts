@@ -53,6 +53,9 @@ export class EventUsers {
               switch (eventType) {
                 case EventType.CREATED:
                   {
+
+                    console.log("REFERENCE:", userData.referenceId)
+
                     const existingUser = await this.userService.findUserByReferenceId(userData.referenceId);
 
                     if (existingUser) throw new Error('Usuario ja existe na base');
@@ -72,7 +75,8 @@ export class EventUsers {
                   {
                     const existingUser = await this.userService.findUserByReferenceId(userData.referenceId);
                     if (existingUser?.id) {
-                      await this.userService.deleteUser(existingUser.referenceId);
+                      console.log("dados:", existingUser.dataValues)
+                      await this.userService.deleteUser(existingUser.dataValues.referenceId);
                     } else {
                       console.log("Usuário não encontrado com o email:", userData.email);
                     }

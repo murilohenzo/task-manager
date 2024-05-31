@@ -6,7 +6,7 @@ interface UserAttributes {
     id: number;
     username: string;
     email: string;
-    referenceId: string
+    referenceId: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -40,9 +40,9 @@ User.init(
         referenceId: {
             type: DataTypes.CHAR(36),
             allowNull: false,
-            field: 'referenceId',
-            defaultValue: uuidv4
-          }
+            defaultValue: uuidv4,
+            unique: true
+        }
     },
     {
         sequelize,
