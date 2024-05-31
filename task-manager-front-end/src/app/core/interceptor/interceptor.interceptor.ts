@@ -19,15 +19,13 @@ export class InterceptorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
 
-    if (!token) {
-      this.router.navigate([Routes.LOGIN]);
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
     }
-
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
 
     return next.handle(request);
   }

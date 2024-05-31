@@ -46,18 +46,20 @@ export class UserStoreService {
     this.formListenerSubject
       .pipe(
         debounceTime(500),
-        filter((user: UserPost) => !!user.email)
+        filter((user: UserPost) => !!user.username)
       )
       .subscribe((userValue: UserPost) => {
         this.userService.createUser(userValue).subscribe({
           next: () => {
             this.router.navigate([Routes.REGISTRATION_CONFIRM]);
           },
-          error: () =>
+          error: () => {
+            this.router.navigate([Routes.REGISTRATION]);
             this.dialog
               .open(ErrorModalComponent, { width: '400px' })
               .afterClosed()
-              .subscribe(() => this.router.navigate([Routes.REGISTRATION]))
+              .subscribe(() => this.router.navigate([Routes.REGISTRATION]));
+          }
         });
       });
   }
