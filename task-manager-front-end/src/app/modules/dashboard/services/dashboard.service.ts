@@ -5,7 +5,8 @@ import { environment } from 'src/app/core/environments/environment';
 import {
   NewTask,
   NewTaskResponse,
-  Task
+  Task,
+  TaskList
 } from 'src/app/shared/interfaces/task.interface';
 
 @Injectable({
@@ -14,22 +15,22 @@ import {
 export class DashboardService {
   constructor(private http: HttpClient) {}
 
-  getTasksByUser(userId: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`${environment.LOCAL}/task/${userId}`);
+  getTasksByUser(userId: string): Observable<TaskList> {
+    return this.http.get<TaskList>(`${environment.LOCAL}/tasks/${userId}`);
   }
 
   createTask(body: NewTask): Observable<NewTaskResponse> {
-    return this.http.post<NewTaskResponse>(`${environment.LOCAL}/task`, body);
+    return this.http.post<NewTaskResponse>(`${environment.LOCAL}/tasks`, body);
   }
 
   updateTask(taskId: string, body: Partial<Task>): Observable<NewTaskResponse> {
     return this.http.put<NewTaskResponse>(
-      `${environment.LOCAL}/task/${taskId}`,
+      `${environment.LOCAL}/tasks/${taskId}`,
       body
     );
   }
 
   deleteTask(taskId: string): Observable<Task[]> {
-    return this.http.delete<Task[]>(`${environment.LOCAL}/task/${taskId}`);
+    return this.http.delete<Task[]>(`${environment.LOCAL}/tasks/${taskId}`);
   }
 }

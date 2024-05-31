@@ -76,7 +76,7 @@ export class UserStoreService {
           next: (request: UserLoginResponse) => {
             localStorage.setItem('token', request.access_token);
             this.setUserId(userValue.username);
-            this.router.navigate([Routes.DASHBOARD]);
+            this.router.navigate([Routes.DEFAULT]);
           },
           error: () =>
             this.dialog

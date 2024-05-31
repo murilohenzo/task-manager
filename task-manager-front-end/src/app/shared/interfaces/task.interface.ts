@@ -1,3 +1,7 @@
+export interface TaskList {
+  tasks: Task[];
+}
+
 export interface Task {
   id: number;
   nome: string;

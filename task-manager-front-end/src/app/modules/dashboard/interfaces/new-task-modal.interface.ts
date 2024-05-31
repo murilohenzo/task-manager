@@ -5,5 +5,5 @@ export interface NewTaskModal {
   disciplina: string;
   periodo: string;
   done: boolean;
-  usuario: string;
+  userReferenceId: string;
 }

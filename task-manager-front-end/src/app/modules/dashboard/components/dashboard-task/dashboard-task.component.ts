@@ -4,6 +4,10 @@ import { Task } from 'src/app/shared/interfaces/task.interface';
 import { PriorityColors, PriorityLevel } from '../../enums/priority-level';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteTaskComponent } from '../modals/delete-task/delete-task.component';
+import { DashboardService } from '../../services/dashboard.service';
+import { Router } from '@angular/router';
+import { ErrorModalComponent } from 'src/app/shared/components/modals/error-modal/error-modal.component';
+import { Routes } from 'src/app/shared/enums/routes';
 
 @Component({
   selector: 'app-dashboard-task',
@@ -16,7 +20,12 @@ export class DashboardTaskComponent {
 
   editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    private dashboardService: DashboardService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -58,11 +67,30 @@ export class DashboardTaskComponent {
     for (const field in this.editForm.controls) {
       this.editForm.controls[field].valueChanges.subscribe((value) => {
         if (field !== 'cor') {
-          // TODO: adicionar método de atualização da task
+          this.updateTask(field, value);
         }
         return;
       });
     }
+  }
+
+  private updateTask(field: string, value: any): void {
+    this.dashboardService
+      .updateTask(this.editForm.value.id, this.getBodyFormatted(field, value))
+      .subscribe({
+        error: () => {
+          this.dialog
+            .open(ErrorModalComponent, { width: '400px' })
+            .afterClosed()
+            .subscribe(() => this.router.navigate([Routes.DASHBOARD]));
+        }
+      });
+  }
+
+  private getBodyFormatted(field: string, value: any): Partial<Task> {
+    const body: Partial<Task> = {};
+    body[field as keyof Task] = value;
+    return body;
   }
 
   private setDividerColor(priority: string): void {
