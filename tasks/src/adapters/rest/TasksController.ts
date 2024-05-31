@@ -14,8 +14,8 @@ export default class TasksController{
 
     public getAllTasks = async (req: Request, res: Response) => {
         console.log("ENTROU NO METODO FINDALL")
-        const { userId } = req.params;
-        const tasks = await this.taskService.getAllTasks(userId);
+        const { userReferenceId } = req.params;
+        const tasks = await this.taskService.getAllTasks(userReferenceId);
         return res.status(200).json({tasks})
     }
 

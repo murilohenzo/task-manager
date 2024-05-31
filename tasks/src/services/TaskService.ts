@@ -4,10 +4,10 @@ import { TaskDTO } from "../dto/TaskDTO";
 
 export default class TaskService{
 
-    public getAllTasks = async(userId: string) => {
+    public getAllTasks = async(userReferenceId: string) => {
         return await Task.findAll({
             where: {
-                id: userId
+                $userReferenceId$: userReferenceId
             }
         })
     }

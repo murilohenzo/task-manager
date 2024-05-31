@@ -47,9 +47,9 @@ export default class TasksController {
             user: user,
           });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      return res.status(500).json({ error });
+      return res.status(500).json({ error: error.message });
     }
   };
 
