@@ -34,7 +34,7 @@ export class AuthenticationService {
 
   getUserByUsername(userName: string): Observable<UserNameResponse> {
     return this.http.get<UserNameResponse>(
-      `${environment.LOCAL}/login/${userName}`
+      `${environment.LOCAL}/user/${userName}`
     );
   }
 }

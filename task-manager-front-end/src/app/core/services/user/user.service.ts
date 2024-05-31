@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  UserNameResponse,
   UserPost,
   UserPostResponse
 } from 'src/app/shared/interfaces/user.interface';
@@ -20,7 +21,7 @@ export class UserService {
     );
   }
 
-  getUsers(): Observable<UserPost[]> {
-    return this.http.get<UserPost[]>(`${environment.LOCAL}/user`);
+  getUsers(): Observable<UserNameResponse[]> {
+    return this.http.get<UserNameResponse[]>(`${environment.LOCAL}/user`);
   }
 }
