@@ -3,15 +3,15 @@ import sequelize from '../../config/db';
 import User from './User';
 
 interface TaskAttributes {
-    id: number;
+    id?: number;
     nome: string;
-    prioridade: number;
-    cor: string;
     descricao: string;
     disciplina: string;
     periodo: string;
     done: boolean;
-    userId?: number;
+    userReferenceId: string; // Este campo será usado para o relacionamento
+    cor: string;
+    prioridade: number;
 }
 
 interface TaskCreationAttributes extends Optional<TaskAttributes, 'id'> {}
@@ -25,7 +25,7 @@ class Task extends Model<TaskAttributes, TaskCreationAttributes> implements Task
     public disciplina!: string;
     public periodo!: string;
     public done!: boolean;
-    public userId?: number;
+    public userReferenceId!: string;
 }
 
 // Inicialização do modelo Task
@@ -65,11 +65,12 @@ Task.init(
             allowNull: false,
             defaultValue: false
         },
-        userId: {
-            type: DataTypes.BIGINT,
+        userReferenceId: {
+            type: DataTypes.CHAR(36),
+            allowNull: false,
             references: {
                 model: 'Users', // Nome da tabela referenciada
-                key: 'id'
+                key: 'referenceId'
             }
         }
     },
@@ -81,8 +82,8 @@ Task.init(
 );
 
 // Definindo a associação entre Tasks e Users
-Task.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' }); // Task pertence a User
-User.hasMany(Task, { foreignKey: 'userId' }); // User possui várias Tasks
+Task.belongsTo(User, { foreignKey: 'userReferenceId', onDelete: 'CASCADE' }); // Task pertence a User
+User.hasMany(Task, { foreignKey: 'userReferenceId' }); // User possui várias Tasks
 
 // Função para sincronizar o modelo Task com o banco de dados
 async function syncTaskModel() {

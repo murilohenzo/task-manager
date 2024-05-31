@@ -168,7 +168,7 @@ services:
     #   - "traefik.http.services.gateway.loadbalancer.server.port=8080"
     environment:
       KEYCLOAK_CLIENT_ID: gateway-auth-des
-      KEYCLOAK_CLIENT_SECRET: JpJ3asOKUDsO9Gn8tXS6yFLOpRBapjIj
+      KEYCLOAK_CLIENT_SECRET: RfxkVHghvhwOivuZauPwut4mzKPLLJn1
       KEYCLOAK_URI: http://keycloak:8080/realms/myrealm
 
 networks:

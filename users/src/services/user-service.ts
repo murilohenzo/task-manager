@@ -35,6 +35,11 @@ export default class UserService {
     }
   };
 
+  public findUserByUsername = async (username: any) => {
+    const user = await User.findOne({ where: { username: username}});
+    return user;
+  }
+
   public getAllUser = async () => {
     return await User.findAll();
   };

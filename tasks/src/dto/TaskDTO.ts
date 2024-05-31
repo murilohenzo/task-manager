@@ -7,5 +7,5 @@ export type TaskDTO = {
   disciplina: string;
   periodo: string;
   done: boolean;
-  userId: number
+  userReferenceId: string
 }

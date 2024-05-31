@@ -16,6 +16,19 @@ export default class TasksController {
     });
   };
 
+  public getUserByUserName = async (req: Request, res: Response) => {
+    const { username } = req.params;
+
+    if (!username) return res.status(400).json({ messsage: 'Username deve ser informado'})
+
+    const user = await this.userService.findUserByUsername(username);
+
+    if (!user) return res.status(404).json({ messsage: 'Usuario nao encontrado '})
+    
+    return res.status(200).json(user.dataValues);
+
+  }
+
   public createUser = async (req: Request, res: Response) => {
     const userData: User = Object.keys(req.body).length !== 0 ? req.body : null;
 
