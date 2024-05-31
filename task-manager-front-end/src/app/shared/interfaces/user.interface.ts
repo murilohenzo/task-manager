@@ -6,6 +6,11 @@ export interface UserPost {
   lastName: string;
 }
 
+export interface UserNameResponse extends UserPost {
+  id: number;
+  referenceId: string;
+}
+
 export interface UserPostResponse {
   message: string;
   user: UserPost;

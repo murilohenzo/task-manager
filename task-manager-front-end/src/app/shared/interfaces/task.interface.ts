@@ -1,3 +1,7 @@
+export interface TaskList {
+  tasks: Task[];
+}
+
 export interface Task {
   id: number;
   nome: string;
@@ -7,5 +11,19 @@ export interface Task {
   disciplina: string;
   periodo: string;
   done: boolean;
-  userId: number;
+  userReferenceId: number;
+}
+
+export interface NewTask {
+  nome: string;
+  prioridade: number;
+  descricao: string;
+  disciplina: string;
+  periodo: string;
+  userReferenceId: string;
+}
+
+export interface NewTaskResponse {
+  message: string;
+  task: Task;
 }

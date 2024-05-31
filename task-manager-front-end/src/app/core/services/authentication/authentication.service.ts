@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
   UserLogin,
-  UserLoginResponse
+  UserLoginResponse,
+  UserNameResponse
 } from 'src/app/shared/interfaces/user.interface';
 import { environment } from '../../environments/environment';
 import { Routes } from 'src/app/shared/enums/routes';
@@ -29,5 +30,11 @@ export class AuthenticationService {
 
   authenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  getUserByUsername(userName: string): Observable<UserNameResponse> {
+    return this.http.get<UserNameResponse>(
+      `${environment.LOCAL}/user/${userName}`
+    );
   }
 }

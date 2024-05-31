@@ -1,8 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { PriorityColors, PriorityLevel } from '../../../enums/priority-level';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef
+} from '@angular/material/dialog';
 import { NewTaskModal } from '../../../interfaces/new-task-modal.interface';
+import { DashboardService } from '../../../services/dashboard.service';
+import { Router } from '@angular/router';
+import { ErrorModalComponent } from 'src/app/shared/components/modals/error-modal/error-modal.component';
+import { Routes } from 'src/app/shared/enums/routes';
 
 @Component({
   selector: 'app-new-task',
@@ -16,7 +24,10 @@ export class NewTaskComponent {
   constructor(
     public dialogRef: MatDialogRef<NewTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: NewTaskModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dashboardService: DashboardService,
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,8 +36,22 @@ export class NewTaskComponent {
   }
 
   createTask(): void {
-    // TODO: Adicionar método de criação de task
-    console.log(this.newTaskForm.value);
+    if (this.newTaskForm.valid) {
+      this.dashboardService.createTask(this.newTaskForm.value).subscribe({
+        next: () => {
+          this.dialogRef.close();
+        },
+        error: () => {
+          this.dialogRef.close();
+          this.dialog
+            .open(ErrorModalComponent, { width: '400px' })
+            .afterClosed()
+            .subscribe(() => this.router.navigate([Routes.DASHBOARD]));
+        }
+      });
+      return;
+    }
+    this.dialogRef.close();
   }
 
   private buildForm(): void {
@@ -37,7 +62,7 @@ export class NewTaskComponent {
       disciplina: [''],
       periodo: [''],
       done: [false],
-      usuario: [this.data.usuario]
+      userReferenceId: [this.data.userReferenceId]
     });
   }
 

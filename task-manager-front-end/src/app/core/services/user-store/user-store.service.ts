@@ -3,7 +3,8 @@ import { BehaviorSubject, debounceTime, filter } from 'rxjs';
 import {
   UserPost,
   UserLogin,
-  UserLoginResponse
+  UserLoginResponse,
+  UserNameResponse
 } from 'src/app/shared/interfaces/user.interface';
 import { UserService } from '../user/user.service';
 import { AuthenticationService } from '../authentication/authentication.service';
@@ -46,18 +47,20 @@ export class UserStoreService {
     this.formListenerSubject
       .pipe(
         debounceTime(500),
-        filter((user: UserPost) => !!user.email)
+        filter((user: UserPost) => !!user.username)
       )
       .subscribe((userValue: UserPost) => {
         this.userService.createUser(userValue).subscribe({
           next: () => {
             this.router.navigate([Routes.REGISTRATION_CONFIRM]);
           },
-          error: () =>
+          error: () => {
+            this.router.navigate([Routes.REGISTRATION]);
             this.dialog
               .open(ErrorModalComponent, { width: '400px' })
               .afterClosed()
-              .subscribe(() => this.router.navigate([Routes.REGISTRATION]))
+              .subscribe(() => this.router.navigate([Routes.REGISTRATION]));
+          }
         });
       });
   }
@@ -72,8 +75,8 @@ export class UserStoreService {
         this.authenticationService.login(userValue).subscribe({
           next: (request: UserLoginResponse) => {
             localStorage.setItem('token', request.access_token);
-            // localStorage.setItem('id', JSON.stringify(request.result.user.id));
-            this.router.navigate([Routes.DASHBOARD]);
+            this.setUserId(userValue.username);
+            this.router.navigate([Routes.DEFAULT]);
           },
           error: () =>
             this.dialog
@@ -82,5 +85,14 @@ export class UserStoreService {
               .subscribe(() => this.router.navigate([Routes.LOGIN]))
         });
       });
+  }
+
+  private setUserId(username: string): void {
+    this.authenticationService.getUserByUsername(username).subscribe({
+      next: (response: UserNameResponse) => {
+        localStorage.setItem('id', JSON.stringify(response.referenceId));
+        localStorage.setItem('name', JSON.stringify(response.firstName));
+      }
+    });
   }
 }
