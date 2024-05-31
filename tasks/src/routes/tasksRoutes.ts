@@ -5,7 +5,7 @@ const taskController = new TasksController();
 const router = express.Router();
 
 router
-    .get('/tasks/:userId', taskController.getAllTasks)
+    .get('/tasks/:userReferenceId', taskController.getAllTasks)
     .post('/tasks',taskController.createTask)
     .put('/tasks/:taskId', taskController.updateTask)
     .delete('/tasks/:taskId', taskController.deleteTask)
