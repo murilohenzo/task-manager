@@ -24,14 +24,13 @@
 
   .registration-header {
     margin: 0 auto;
-    padding-bottom: 10px;
+    padding: 0;
 
     &__title {
       color: $blue-darkest;
       font-family: $lexend;
       font-weight: 900;
       font-size: 1.5rem;
-      padding-bottom: 20px;
       text-transform: uppercase;
       text-align: center;
     }
@@ -48,18 +47,28 @@
 
     &__user-info {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 20px;
+    }
+
+    &__acess-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     &__first-field {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
     }
 
     &__form-field {
       width: 50%;
+    }
+
+    &__email-field {
+      width: 100%;
     }
 
     &__field-name {
@@ -119,8 +128,6 @@
   color: $blue-darkest;
   font-family: $lexend;
   font-size: 0.7rem;
-  padding-top: 10px;
-  padding-bottom: 10px;
 
   &--logo {
     font-family: $laleza;
@@ -180,7 +187,7 @@ p {
   margin-left: -8px !important;
   margin-top: 8px;
   line-height: 70% !important;
-  width: 320px;
+  width: 135%;
 }
 
 .hint-password {

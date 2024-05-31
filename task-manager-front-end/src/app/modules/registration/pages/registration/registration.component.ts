@@ -6,6 +6,7 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
+import { UserStoreService } from 'src/app/core/services/user-store/user-store.service';
 
 @Component({
   selector: 'app-registration',
@@ -23,27 +24,48 @@ export class RegistrationComponent {
   );
   showPassword: boolean = false;
 
-  constructor(
-    private fb: FormBuilder // private newUserStore: NewUserStoreService
-  ) {}
+  constructor(private fb: FormBuilder, private userStore: UserStoreService) {}
 
   ngOnInit(): void {
     this.createRegistrationForm();
   }
 
   registerDataForm(): any {
-    // this.newUserStore.setFormValue(this.registrationForm.value);
+    this.userStore.setFormValue(this.registrationForm.value);
     console.log(this.registrationForm.value);
   }
 
   private createRegistrationForm(): void {
     this.registrationForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.maxLength(100)]],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(100)
+        ]
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100)
+        ]
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100)
+        ]
+      ],
       email: [
         '',
         [Validators.required, Validators.email, Validators.maxLength(255)]
       ],
-      senha: [
+      password: [
         '',
         [
           Validators.required,
@@ -72,15 +94,23 @@ export class RegistrationComponent {
     return null;
   }
 
-  get nome() {
-    return this.registrationForm.get('nome');
+  get username() {
+    return this.registrationForm.get('username');
+  }
+
+  get firstName() {
+    return this.registrationForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.registrationForm.get('lastName');
   }
 
   get email() {
     return this.registrationForm.get('email');
   }
 
-  get senha() {
+  get password() {
     return this.registrationForm.get('password');
   }
 }

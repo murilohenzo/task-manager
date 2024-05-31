@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, debounceTime, filter } from 'rxjs';
 import {
-  User,
+  UserPost,
   UserLogin,
   UserLoginResponse
 } from 'src/app/shared/interfaces/user.interface';
@@ -16,7 +16,7 @@ import { ErrorModalComponent } from 'src/app/shared/components/modals/error-moda
   providedIn: 'root'
 })
 export class UserStoreService {
-  private formListenerSubject!: BehaviorSubject<User>;
+  private formListenerSubject!: BehaviorSubject<UserPost>;
   private formLoginListenerSubject!: BehaviorSubject<UserLogin>;
 
   constructor(
@@ -25,7 +25,7 @@ export class UserStoreService {
     private router: Router,
     private dialog: MatDialog
   ) {
-    this.formListenerSubject = new BehaviorSubject<User>({} as User);
+    this.formListenerSubject = new BehaviorSubject<UserPost>({} as UserPost);
     this.formLoginListenerSubject = new BehaviorSubject<UserLogin>(
       {} as UserLogin
     );
@@ -34,7 +34,7 @@ export class UserStoreService {
     this.loginListener();
   }
 
-  setFormValue(formValue: User): void {
+  setFormValue(formValue: UserPost): void {
     this.formListenerSubject.next(formValue);
   }
 
@@ -46,9 +46,9 @@ export class UserStoreService {
     this.formListenerSubject
       .pipe(
         debounceTime(500),
-        filter((user: User) => !!user.email)
+        filter((user: UserPost) => !!user.email)
       )
-      .subscribe((userValue: User) => {
+      .subscribe((userValue: UserPost) => {
         this.userService.createUser(userValue).subscribe({
           next: () => {
             this.router.navigate([Routes.REGISTRATION_CONFIRM]);

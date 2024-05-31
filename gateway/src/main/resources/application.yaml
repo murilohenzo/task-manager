@@ -20,15 +20,15 @@ spring:
         - id: users
           uri: http://localhost:3003
           predicates:
-          - Path=/user/**
+            - Path=/user/**
           filters:
-          - TokenRelay=
+            - TokenRelay=
         - id: tasks
           uri: http://localhost:3005
           predicates:
-          - Path=/tasks/**
+            - Path=/tasks/**
           filters:
-          - TokenRelay=
+            - TokenRelay=
   security:
     oauth2:
       client:
@@ -41,15 +41,15 @@ spring:
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:
-            authorization-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/auth
-            token-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/token
-            user-info-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/userinfo
-            jwk-set-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/certs
+            authorization-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/auth
+            token-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/token
+            user-info-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8081/realms/myrealm
-          jwk-set-uri: http://localhost:8081/realms/myrealm/protocol/openid-connect/certs
+          issuer-uri: http://keycloak:8080/realms/myrealm
+          jwk-set-uri: http://keycloak:8080/realms/myrealm/protocol/openid-connect/certs
 
 server:
   port: 8085
@@ -76,7 +76,7 @@ management:
 gateway:
   resource:
     client:
-      jwtUrl: http://localhost:8081/realms/myrealm/protocol/openid-connect/token
+      jwtUrl: http://keycloak:8080/realms/myrealm/protocol/openid-connect/token
       client-id: gateway-auth-des
       client-secret: jlgkJlpoaW1pcvhONpv9pAOnVQxSoQ2p
       grantType: password

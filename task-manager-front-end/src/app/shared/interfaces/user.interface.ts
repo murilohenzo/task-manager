@@ -1,11 +1,14 @@
-export interface User {
-  // TODO: verificar esse id (SE NECESSÁRIO)
-  id?: string;
+export interface UserPost {
   username: string;
   password: string;
   email: string;
   firstName: string;
   lastName: string;
+}
+
+export interface UserPostResponse {
+  message: string;
+  user: UserPost;
 }
 
 export interface UserLogin {
