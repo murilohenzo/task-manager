@@ -7,5 +7,19 @@ export interface Task {
   disciplina: string;
   periodo: string;
   done: boolean;
-  userId: number;
+  userReferenceId: number;
+}
+
+export interface NewTask {
+  nome: string;
+  prioridade: number;
+  descricao: string;
+  disciplina: string;
+  periodo: string;
+  userReferenceId: string;
+}
+
+export interface NewTaskResponse {
+  message: string;
+  task: Task;
 }

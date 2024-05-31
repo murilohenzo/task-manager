@@ -44,7 +44,7 @@ export class DashboardTaskComponent {
       disciplina: [this.task.disciplina],
       periodo: [this.task.periodo],
       done: [this.task.done],
-      userId: [this.task.userId]
+      userId: [this.task.userReferenceId]
     });
   }
 

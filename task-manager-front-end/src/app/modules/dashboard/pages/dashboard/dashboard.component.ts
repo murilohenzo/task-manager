@@ -19,7 +19,7 @@ export class DashboardComponent {
       disciplina: 'N780',
       periodo: '2024.1',
       done: false,
-      userId: 1234
+      userReferenceId: 1234
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ export class DashboardComponent {
       disciplina: 'N780',
       periodo: '2024.1',
       done: false,
-      userId: 12344
+      userReferenceId: 12344
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ export class DashboardComponent {
       disciplina: 'N780',
       periodo: '2024.1',
       done: true,
-      userId: 123445
+      userReferenceId: 123445
     }
   ];
 
