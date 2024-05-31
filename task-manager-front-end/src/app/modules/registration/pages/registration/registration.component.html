@@ -30,7 +30,7 @@
               >
                 <mat-hint
                   class="form-content-warn hint-left"
-                  *ngIf="firstName?.errors?.['minLength']"
+                  *ngIf="firstName?.errors?.['minlength']"
                 >
                   O nome deve ter no mínimo 2 caracteres.
                 </mat-hint>
@@ -67,7 +67,7 @@
               >
                 <mat-hint
                   class="form-content-warn hint-left"
-                  *ngIf="lastName?.errors?.['minLength']"
+                  *ngIf="lastName?.errors?.['minlength']"
                 >
                   O sobrenome deve ter no mínimo 2 caracteres.
                 </mat-hint>
@@ -155,9 +155,9 @@
                   </mat-hint>
                   <mat-hint
                     class="form-content-warn hint-left"
-                    *ngIf="username?.errors?.['minLength']"
+                    *ngIf="username?.errors?.['minlength']"
                   >
-                    O nome de usuário deve ter no mínimo 2 caracteres.
+                    O nome de usuário deve ter no mínimo 8 caracteres.
                   </mat-hint>
                   <mat-hint
                     class="form-content-warn hint-left"

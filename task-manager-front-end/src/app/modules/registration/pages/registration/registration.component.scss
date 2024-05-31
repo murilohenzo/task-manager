@@ -9,11 +9,8 @@
   border: none;
   border-radius: 50px;
   box-shadow: 1px 2px 11px -1px $blue-deep;
-  height: 70vh;
-  margin: 0 auto;
-  margin-top: 35px;
-  padding: 20px 60px;
-  width: 60vw;
+  margin: 35px 10px 0 10px;
+  padding: 20px;
 
   .registration-align {
     display: flex;
@@ -30,41 +27,43 @@
       color: $blue-darkest;
       font-family: $lexend;
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       text-transform: uppercase;
       text-align: center;
     }
   }
 
   .registration-form {
+    padding-top: 0;
+
     &__title {
+      color: $blue-medium-dark;
       font-family: $lexend;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 0.875rem;
       text-transform: uppercase;
-      color: $blue-medium-dark;
+      margin-bottom: 2px;
     }
 
     &__user-info {
       display: flex;
-      flex-direction: row;
-      gap: 20px;
+      flex-direction: column;
+      gap: 5px;
     }
 
     &__acess-info {
       display: flex;
       flex-direction: column;
-      gap: 10px;
     }
 
     &__first-field {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 20px;
     }
 
     &__form-field {
-      width: 50%;
+      width: 100%;
     }
 
     &__email-field {
@@ -179,7 +178,7 @@
 }
 
 p {
-  margin-top: 22px;
+  margin-top: 5px;
 }
 
 .hint-left {
@@ -187,10 +186,69 @@ p {
   margin-left: -8px !important;
   margin-top: 8px;
   line-height: 70% !important;
-  width: 135%;
+  width: 125%;
 }
 
 .hint-password {
   margin-left: 0 !important;
   margin-top: 5px;
+}
+
+@media screen and (min-width: 1024px) {
+  .registration {
+    height: 70vh;
+    margin: 0 auto;
+    margin-top: 35px;
+    padding: 20px 60px;
+    width: 60vw;
+
+    .registration-header {
+      &__title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .registration-form {
+      padding-top: 16px;
+
+      &__title {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      &__user-info {
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      &__acess-info {
+        gap: 10px;
+      }
+
+      &__first-field {
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      &__form-field {
+        width: 50%;
+      }
+
+      &__email-field {
+        width: 100%;
+      }
+
+      &__field-name {
+        width: 100%;
+      }
+    }
+  }
+
+  p {
+    margin-top: 22px;
+  }
+
+  .hint-left {
+    width: 135%;
+  }
 }
