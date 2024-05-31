@@ -6,6 +6,10 @@ import { RegistrationComponent } from '../registration/pages/registration/regist
 import { LoginComponent } from '../login/pages/login/login.component';
 import { RegistrationConfirmComponent } from '../registration/pages/registration-confirm/registration-confirm.component';
 import { DashboardComponent } from '../dashboard/pages/dashboard/dashboard.component';
+import { UnauthorizedComponent } from '../unauthorized/pages/unauthorized/unauthorized.component';
+import { DashboardGuard } from '../dashboard/guard/dashboard.guard';
+import { LoginGuard } from '../login/guard/login.guard';
+import { RegistrationGuard } from '../registration/guard/registration.guard';
 
 const routes: Routes = [
   {
@@ -18,19 +22,27 @@ const routes: Routes = [
       },
       {
         path: 'registration',
-        component: RegistrationComponent
+        component: RegistrationComponent,
+        canActivate: [RegistrationGuard]
       },
       {
         path: 'registration-confirm',
-        component: RegistrationConfirmComponent
+        component: RegistrationConfirmComponent,
+        canActivate: [RegistrationGuard]
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [LoginGuard]
+      },
+      {
+        path: 'unauthorized',
+        component: UnauthorizedComponent
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [DashboardGuard]
       }
     ]
   }

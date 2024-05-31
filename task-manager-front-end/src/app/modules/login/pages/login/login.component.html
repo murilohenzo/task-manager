@@ -7,15 +7,16 @@
       <div class="login-card__align">
         <form class="login-card__form" [formGroup]="loginForm">
           <mat-form-field class="login-card__form--left" appearance="fill">
-            <mat-label class="login-card__label">E-mail</mat-label>
-            <input class="login-card__input" matInput formControlName="email" />
+            <mat-label class="login-card__label">Nome de usuário</mat-label>
+            <input
+              class="login-card__input"
+              matInput
+              formControlName="username"
+            />
           </mat-form-field>
-          <div *ngIf="email?.touched && email?.errors" class="hint-left">
-            <mat-hint class="hint-left" *ngIf="email?.errors?.['email']">
-              Insira um e-mail válido.
-            </mat-hint>
-            <mat-hint class="hint-left" *ngIf="email?.errors?.['required']">
-              O e-mail é obrigatório.
+          <div *ngIf="username?.touched && username?.errors" class="hint-left">
+            <mat-hint class="hint-left" *ngIf="username?.errors?.['required']">
+              O nome de usuário é obrigatório.
             </mat-hint>
           </div>
 
@@ -25,7 +26,7 @@
               class="login-card__input"
               matInput
               [type]="showPassword ? 'text' : 'password'"
-              formControlName="senha"
+              formControlName="password"
               type="password"
               autocomplete="off"
             />
@@ -37,8 +38,8 @@
               {{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon
             >
           </mat-form-field>
-          <div *ngIf="senha?.touched && senha?.errors" class="hint-left">
-            <mat-hint class="hint-left" *ngIf="senha?.errors?.['required']">
+          <div *ngIf="password?.touched && password?.errors" class="hint-left">
+            <mat-hint class="hint-left" *ngIf="password?.errors?.['required']">
               A senha é obrigatória.
             </mat-hint>
           </div>
@@ -54,7 +55,10 @@
           >
             Acessar
           </button>
-          <button class="login-buttons__cancel" (click)="navigate('/')">
+          <button
+            class="login-buttons__cancel"
+            (click)="navigate(routes.DEFAULT)"
+          >
             Cancelar
           </button>
         </div>
@@ -63,7 +67,9 @@
 
     <span class="login-new-register"
       >Ainda não tem conta?
-      <span class="login-new-register__link" (click)="navigate('/registration')"
+      <span
+        class="login-new-register__link"
+        (click)="navigate(routes.REGISTRATION)"
         >Cadastre-se.</span
       ></span
     >

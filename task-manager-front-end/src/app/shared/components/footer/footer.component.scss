@@ -14,10 +14,20 @@
   text-transform: uppercase;
 
   &__items {
+    flex-direction: column;
+    margin-left: 10px;
+  }
+
+  &__info {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  &__items,
+  &__info {
     align-items: center;
     justify-content: center;
     display: flex;
-    gap: 5px;
   }
 
   &__icon {
@@ -30,5 +40,14 @@
   &__team {
     font-family: $lexend;
     font-size: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    &__items {
+      flex-direction: row;
+      gap: 5px;
+    }
   }
 }

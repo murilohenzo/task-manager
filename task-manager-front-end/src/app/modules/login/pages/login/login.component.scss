@@ -20,8 +20,7 @@
     );
     color: $white;
     height: 50vh;
-    margin: 0 auto;
-    width: 60vw;
+    width: 90vw;
 
     &__title {
       color: $blue-darkest;
@@ -57,7 +56,6 @@
 
       &--left {
         margin-left: 10px;
-        width: 30vw;
       }
     }
 
@@ -158,5 +156,20 @@
   &:hover {
     color: $yellow-logo;
     cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    .login-card {
+      margin: 0 auto;
+      width: 60vw;
+
+      &__form {
+        &--left {
+          width: 30vw;
+        }
+      }
+    }
   }
 }

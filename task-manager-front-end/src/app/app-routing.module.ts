@@ -8,6 +8,13 @@ const routes: Routes = [
       import('../app/modules/mainframe/mainframe.module').then(
         (m) => m.MainframeModule
       )
+  },
+  {
+    path: 'registration',
+    loadChildren: () =>
+      import('../app/modules/mainframe/mainframe.module').then(
+        (m) => m.MainframeModule
+      )
   }
 ];
 

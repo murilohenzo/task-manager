@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserStoreService } from 'src/app/core/services/user-store/user-store.service';
+import { Routes } from 'src/app/shared/enums/routes';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,10 @@ export class LoginComponent {
 
   showPassword = false;
 
+  readonly routes = Routes;
+
   constructor(
-    // private newUserStore: NewUserStoreService,
+    private userStore: UserStoreService,
     private router: Router,
     private fb: FormBuilder
   ) {}
@@ -23,8 +27,7 @@ export class LoginComponent {
   }
 
   login(): void {
-    // this.newUserStore.setFormLoginValue(this.loginForm.value);
-    console.log(this.loginForm.value);
+    this.userStore.setFormLoginValue(this.loginForm.value);
   }
 
   navigate(path: string): void {
@@ -33,16 +36,16 @@ export class LoginComponent {
 
   private createLoginForm(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
-  get email() {
-    return this.loginForm.get('email');
+  get username() {
+    return this.loginForm.get('username');
   }
 
-  get senha() {
-    return this.loginForm.get('senha');
+  get password() {
+    return this.loginForm.get('password');
   }
 }

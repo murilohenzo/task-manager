@@ -1,15 +1,28 @@
 <mat-toolbar class="header">
   <div class="header__items">
-    <span class="header__name" (click)="navigate('/')">U-Task Manager</span>
+    <span class="header__name" (click)="navigate(routes.DEFAULT)">U-TM</span>
     <img
       class="header__logo"
       src="../../../../assets/img/logo.png"
-      alt="Logo do sistema Task Manager da UNIFOR"
+      alt="Logo do sistema U-Task Manager"
     />
+    <span *ngIf="isAuthenticated" class="header__page--padding">
+      <h2 class="header__page" (click)="navigate(routes.DASHBOARD)">TO-DOs</h2>
+    </span>
   </div>
-  <div class="header__login">
-    <mat-icon class="header__login--icon" (click)="navigate('/login')"
-      >login</mat-icon
+  <div class="header__buttons">
+    <button
+      *ngIf="!isAuthenticated"
+      class="login"
+      (click)="navigate(routes.LOGIN)"
     >
+      <h1 class="login__description">Login</h1>
+      <mat-icon class="login__icon"> login </mat-icon>
+    </button>
+
+    <button *ngIf="isAuthenticated" class="login" (click)="logout()">
+      <h1 class="login__description">Sair</h1>
+      <mat-icon class="login__icon"> logout </mat-icon>
+    </button>
   </div>
 </mat-toolbar>
