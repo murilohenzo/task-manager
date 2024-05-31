@@ -1,0 +1,35 @@
+@import '/src/styles/variables.scss';
+
+.unauthorized {
+  display: flex;
+  align-items: center;
+  background: radial-gradient(
+    circle,
+    rgba(99, 149, 194, 1) 10%,
+    rgba(153, 197, 222, 1) 90%
+  );
+
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  height: 80vh;
+
+  &__title {
+    color: $blue-darkest;
+    font-family: $lexend;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__img {
+    margin-top: 10px;
+    width: 13vw;
+  }
+
+  &__text {
+    font-family: $lexend;
+    margin: 10px 0 30px;
+    text-align: center;
+  }
+}

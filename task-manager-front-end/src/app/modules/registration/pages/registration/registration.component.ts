@@ -32,7 +32,6 @@ export class RegistrationComponent {
 
   registerDataForm(): any {
     this.userStore.setFormValue(this.registrationForm.value);
-    console.log(this.registrationForm.value);
   }
 
   private createRegistrationForm(): void {
