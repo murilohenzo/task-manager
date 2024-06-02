@@ -57,7 +57,7 @@ export class UserStoreService {
           error: () => {
             this.router.navigate([Routes.REGISTRATION]);
             this.dialog
-              .open(ErrorModalComponent, { width: '400px' })
+              .open(ErrorModalComponent, { maxWidth: '370px' })
               .afterClosed()
               .subscribe(() => this.router.navigate([Routes.REGISTRATION]));
           }
@@ -80,7 +80,7 @@ export class UserStoreService {
           },
           error: () =>
             this.dialog
-              .open(ErrorModalComponent, { width: '400px' })
+              .open(ErrorModalComponent, { maxWidth: '370px' })
               .afterClosed()
               .subscribe(() => this.router.navigate([Routes.LOGIN]))
         });
