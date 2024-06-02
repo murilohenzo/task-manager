@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     this.dialog
       .open(NewTaskComponent, {
         data: { userReferenceId: this.userId },
-        width: '420px'
+        maxWidth: '99vw'
       })
       .afterClosed()
       .subscribe(() => {
