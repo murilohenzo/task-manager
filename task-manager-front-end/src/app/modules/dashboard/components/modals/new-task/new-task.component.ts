@@ -44,7 +44,7 @@ export class NewTaskComponent {
         error: () => {
           this.dialogRef.close();
           this.dialog
-            .open(ErrorModalComponent, { width: '400px' })
+            .open(ErrorModalComponent, { maxWidth: '370px' })
             .afterClosed()
             .subscribe(() => this.router.navigate([Routes.DASHBOARD]));
         }

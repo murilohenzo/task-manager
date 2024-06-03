@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     this.dialog
       .open(NewTaskComponent, {
         data: { userReferenceId: this.userId },
-        width: '420px'
+        maxWidth: '99vw'
       })
       .afterClosed()
       .subscribe(() => {
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
         },
         error: () =>
           this.dialog
-            .open(ErrorModalComponent, { width: '400px' })
+            .open(ErrorModalComponent, { maxWidth: '370px' })
             .afterClosed()
             .subscribe(() => this.router.navigate([Routes.DEFAULT]))
       });

@@ -35,7 +35,7 @@ export class DeleteTaskComponent {
       },
       error: () => {
         this.dialog
-          .open(ErrorModalComponent, { width: '400px' })
+          .open(ErrorModalComponent, { maxWidth: '370px' })
           .afterClosed()
           .subscribe(() => this.router.navigate([Routes.DASHBOARD]));
       }

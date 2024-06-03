@@ -36,7 +36,7 @@ export class DashboardTaskComponent {
   openDeleteTaskModal(): void {
     this.dialog
       .open(DeleteTaskComponent, {
-        width: '400px',
+        maxWidth: '400px',
         data: { id: this.editForm.controls['id'].value }
       })
       .afterClosed()
@@ -80,7 +80,7 @@ export class DashboardTaskComponent {
       .subscribe({
         error: () => {
           this.dialog
-            .open(ErrorModalComponent, { width: '400px' })
+            .open(ErrorModalComponent, { maxWidth: '370px' })
             .afterClosed()
             .subscribe(() => this.router.navigate([Routes.DASHBOARD]));
         }
